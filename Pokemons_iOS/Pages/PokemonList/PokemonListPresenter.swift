@@ -27,6 +27,7 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     }
     
     func fetchPokemons() {
+        print(offset, limit)
         pokemonListInteractor?.fetchPokemons(offset: offset, limit: limit)
     }
     
@@ -36,7 +37,8 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     }
     
     func updateOffsetCounter() {
-        offset += limit
+        offset += 12 + 2
+        
     }
     
     func showError(error: PokemonServiceError) {

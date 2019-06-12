@@ -29,7 +29,9 @@ class PokemonService: PokemonServiceProtocol {
     
     func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError> {
         let promise = Promise<[Pokemon], PokemonServiceError>()
-        networking?.request(url: "https://recinospokedex.herokuapp.com/api/pokemon/?\(offset)=0&limit=\(limit)")
+        let url = "https://recinospokedex.herokuapp.com/api/pokemon/?offset=\(offset)&&limit=\(limit)"
+        
+        networking?.request(url: url)
             .onSuccess(callback: { response in
                 if let jsonData = response.data {
                     do {

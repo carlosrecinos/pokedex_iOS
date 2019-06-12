@@ -37,6 +37,8 @@
 		72E5B23122B0DDD0000017BE /* ApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E5B23022B0DDD0000017BE /* ApiResponses.swift */; };
 		72E5B23522B17575000017BE /* pokemonFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72E5B23322B17574000017BE /* pokemonFont.ttf */; };
 		72E5B23622B17575000017BE /* pokemonSolidFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72E5B23422B17575000017BE /* pokemonSolidFont.ttf */; };
+		72E5B23922B1A457000017BE /* CustomFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E5B23822B1A457000017BE /* CustomFooterView.swift */; };
+		72E5B23C22B1A488000017BE /* CustomFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E5B23B22B1A488000017BE /* CustomFooterView.xib */; };
 		75277F97B2F6B95BCA7EC0AD /* Pods_Pokemons_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0D028727C3DE0E1BE91283 /* Pods_Pokemons_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,8 @@
 		72E5B23022B0DDD0000017BE /* ApiResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponses.swift; sourceTree = "<group>"; };
 		72E5B23322B17574000017BE /* pokemonFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pokemonFont.ttf; sourceTree = "<group>"; };
 		72E5B23422B17575000017BE /* pokemonSolidFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pokemonSolidFont.ttf; sourceTree = "<group>"; };
+		72E5B23822B1A457000017BE /* CustomFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFooterView.swift; sourceTree = "<group>"; };
+		72E5B23B22B1A488000017BE /* CustomFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomFooterView.xib; sourceTree = "<group>"; };
 		958ACF0690F63FCEA86B2535 /* Pods-Pokemons_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pokemons_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Pokemons_iOS/Pods-Pokemons_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B917E8D73DE483A2D9B335A4 /* Pods-Pokemons_iOS-Pokemons_iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pokemons_iOS-Pokemons_iOS_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Pokemons_iOS-Pokemons_iOS_Tests/Pods-Pokemons_iOS-Pokemons_iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA0D028727C3DE0E1BE91283 /* Pods_Pokemons_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pokemons_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +186,7 @@
 		725F651B22AB031100A72B49 /* PokemonList */ = {
 			isa = PBXGroup;
 			children = (
+				72E5B23A22B1A475000017BE /* CustomFooter */,
 				725F651E22AB0A5800A72B49 /* PokemonList.storyboard */,
 				725F652822AB199600A72B49 /* PokemonListViewController.swift */,
 				7261832922ADDCB2006221CC /* PokemonListPresenter.swift */,
@@ -242,6 +247,7 @@
 		72DF051C22A995E000680EA8 /* Pokemons_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				72E5B23722B1A440000017BE /* Components */,
 				72E5B23222B17556000017BE /* fonts */,
 				725F651A22AB030800A72B49 /* Pages */,
 				725F651322AAC8D700A72B49 /* Helpers */,
@@ -283,6 +289,22 @@
 				72E5B23422B17575000017BE /* pokemonSolidFont.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		72E5B23722B1A440000017BE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		72E5B23A22B1A475000017BE /* CustomFooter */ = {
+			isa = PBXGroup;
+			children = (
+				72E5B23822B1A457000017BE /* CustomFooterView.swift */,
+				72E5B23B22B1A488000017BE /* CustomFooterView.xib */,
+			);
+			path = CustomFooter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +400,7 @@
 				725F651F22AB0A5800A72B49 /* PokemonList.storyboard in Resources */,
 				72DF052322A995E000680EA8 /* Main.storyboard in Resources */,
 				725F653522AB1FD800A72B49 /* Profile.storyboard in Resources */,
+				72E5B23C22B1A488000017BE /* CustomFooterView.xib in Resources */,
 				725F652C22AB1B8D00A72B49 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +514,7 @@
 				725F653322AB1FBD00A72B49 /* ProfileViewController.swift in Sources */,
 				72E5B23122B0DDD0000017BE /* ApiResponses.swift in Sources */,
 				725F650822AAC0B100A72B49 /* NetworkingProtocols.swift in Sources */,
+				72E5B23922B1A457000017BE /* CustomFooterView.swift in Sources */,
 				725F651222AAC87E00A72B49 /* Pokemon.swift in Sources */,
 				725F652922AB199600A72B49 /* PokemonListViewController.swift in Sources */,
 				725F652E22AB1C2300A72B49 /* SettingsViewController.swift in Sources */,
