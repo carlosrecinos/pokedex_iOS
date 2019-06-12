@@ -20,4 +20,11 @@ struct Pokemon: Decodable {
         let id = urlWithouLastSlash[range]
         return Int(id)
     }
+    
+    func getImageUrl() -> String {
+        let baseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        let pokemonId = getPokemonId()
+        let imageUrl = "\(baseUrl)\(pokemonId ?? 1).png"
+        return imageUrl
+    }
 }

@@ -27,7 +27,6 @@ class AuthenticationService: AuthenticationServiceProtocol {
     }
     
     func signIn(_ username: String, _ password: String) -> Future<User, AuthenticationServiceError> {
-        print("From service")
         let promise = Promise<User, AuthenticationServiceError>()
         if(username == "carlosrecinos" && password == "chalate") {
             let loggedUser = User(id: 1, name: "Carlos Recinos", username: username)
