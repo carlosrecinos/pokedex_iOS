@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pwg-JW-Ymj">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="6I0-b2-Elw">
+            <objects>
+                <viewController id="pwg-JW-Ymj" customClass="LoginViewController" customModule="Pokemons_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hf8-LA-LCV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="playback" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_background" translatesAutoresizingMaskIntoConstraints="NO" id="JGU-qY-m7M">
+                                <rect key="frame" x="0.0" y="0.0" width="607" height="896"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="U9e-5X-p6j" userLabel="LoginStackView">
+                                <rect key="frame" x="50" y="144" width="314" height="281"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="fRr-uR-btr">
+                                        <rect key="frame" x="0.0" y="0.0" width="314" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Onm-DF-VZg"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="username"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oaf-ig-TL8">
+                                        <rect key="frame" x="0.0" y="58" width="314" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="UwR-fU-pmh"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3m-Td-8S2">
+                                        <rect key="frame" x="0.0" y="116" width="314" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" red="0.93244327910958902" green="0.11445847602739725" blue="0.23232188820838928" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks5-of-CGh">
+                                        <rect key="frame" x="0.0" y="144.5" width="314" height="50"/>
+                                        <color key="backgroundColor" red="0.792156862745098" green="0.11372549019607843" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ev7-YV-GSX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="contentEdgeInsets" minX="50" minY="8" maxX="50" maxY="8"/>
+                                        <state key="normal" title="Sign In"/>
+                                        <connections>
+                                            <action selector="loginButtonPressed:" destination="pwg-JW-Ymj" eventType="touchUpInside" id="yUJ-AP-vFa"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyf-gK-l0h">
+                                        <rect key="frame" x="0.0" y="202.5" width="314" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqi-HJ-nHN">
+                                        <rect key="frame" x="0.0" y="231" width="314" height="50"/>
+                                        <color key="backgroundColor" red="0.95294117647058818" green="0.82745098039215681" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hkV-6V-vt3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <inset key="contentEdgeInsets" minX="50" minY="8" maxX="50" maxY="8"/>
+                                        <state key="normal" title="Sign Up"/>
+                                        <connections>
+                                            <action selector="loginButtonPressed:" destination="pwg-JW-Ymj" eventType="touchUpInside" id="p6C-G4-rRY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ks5-of-CGh" firstAttribute="top" secondItem="Oaf-ig-TL8" secondAttribute="bottom" constant="36.5" id="Amy-4T-FXf"/>
+                                    <constraint firstItem="g3m-Td-8S2" firstAttribute="top" secondItem="Oaf-ig-TL8" secondAttribute="bottom" constant="8" id="Oz6-Hj-B5t"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ebD-k0-2g3" userLabel="Pokeloading">
+                                <rect key="frame" x="66" y="756" width="282" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" image="pokeballs_blue" translatesAutoresizingMaskIntoConstraints="NO" id="yb1-eW-cU2">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="gw5-UL-RcK"/>
+                                            <constraint firstAttribute="height" constant="50" id="rpA-fT-yjx"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeballs_purple" translatesAutoresizingMaskIntoConstraints="NO" id="Dzr-u6-VJ2">
+                                        <rect key="frame" x="58" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="mPE-Ya-E3T"/>
+                                            <constraint firstAttribute="height" constant="50" id="nr4-uc-Ojc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeballs_red" translatesAutoresizingMaskIntoConstraints="NO" id="7XY-W7-OYK">
+                                        <rect key="frame" x="116" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="OGJ-pH-iUw"/>
+                                            <constraint firstAttribute="width" constant="50" id="pcc-bt-uK8"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" image="pokeballs_white" translatesAutoresizingMaskIntoConstraints="NO" id="SWo-Hs-Ofx">
+                                        <rect key="frame" x="174" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NK1-Ym-uow"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" image="pokeballs_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="8AV-sj-9or">
+                                        <rect key="frame" x="232" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="fHj-tg-3JZ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="U9e-5X-p6j" firstAttribute="top" secondItem="y3f-Yu-5T7" secondAttribute="top" constant="100" id="6s2-lM-phG"/>
+                            <constraint firstItem="U9e-5X-p6j" firstAttribute="leading" secondItem="y3f-Yu-5T7" secondAttribute="leading" constant="50" id="hA8-3v-vdn"/>
+                            <constraint firstItem="y3f-Yu-5T7" firstAttribute="trailing" secondItem="U9e-5X-p6j" secondAttribute="trailing" constant="50" id="puA-eR-Tjm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y3f-Yu-5T7"/>
+                    </view>
+                    <connections>
+                        <outlet property="bluePokeballImageView" destination="yb1-eW-cU2" id="pk5-y0-Ojq"/>
+                        <outlet property="loginBackgroundImageView" destination="JGU-qY-m7M" id="V4i-8t-Q8q"/>
+                        <outlet property="loginErrorLabel" destination="g3m-Td-8S2" id="aEB-bj-C9a"/>
+                        <outlet property="passwordInputText" destination="Oaf-ig-TL8" id="3zf-hb-m6Q"/>
+                        <outlet property="purplePokeballImageView" destination="Dzr-u6-VJ2" id="0qT-LD-ysc"/>
+                        <outlet property="redPokeballImageView" destination="7XY-W7-OYK" id="dQA-IA-k1i"/>
+                        <outlet property="signInButton" destination="ks5-of-CGh" id="h3Z-vB-gVd"/>
+                        <outlet property="usernameInputText" destination="fRr-uR-btr" id="lPx-Mw-ZIj"/>
+                        <outlet property="whitePokeballImageView" destination="SWo-Hs-Ofx" id="mhY-DF-gmO"/>
+                        <outlet property="yellowPokeballImageView" destination="8AV-sj-9or" id="49f-d9-s2B"/>
+                        <segue destination="rLn-P5-gcB" kind="show" identifier="goToMain" id="d31-0A-tnN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ikC-Xg-Qiu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="146.40000000000001" y="-3.1484257871064472"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="MO9-Pb-wVF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="rLn-P5-gcB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tsr-Kx-piu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682" y="-68"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="login_background" width="1920" height="1200"/>
+        <image name="pokeballs_blue" width="123" height="124"/>
+        <image name="pokeballs_purple" width="123" height="123"/>
+        <image name="pokeballs_red" width="123" height="125"/>
+        <image name="pokeballs_white" width="124" height="123"/>
+        <image name="pokeballs_yellow" width="125" height="124"/>
+    </resources>
+</document>
