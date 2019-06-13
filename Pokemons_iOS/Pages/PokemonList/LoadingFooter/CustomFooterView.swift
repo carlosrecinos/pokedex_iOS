@@ -1,12 +1,3 @@
-//
-//  CustomFooterView.swift
-//  Pokemons_iOS
-//
-//  Created by Carlos Recinos on 6/12/19.
-//  Copyright © 2019 genui. All rights reserved.
-//
-
-import Foundation
 import UIKit
 
 class CustomFooterView : UICollectionReusableView {
@@ -25,6 +16,7 @@ class CustomFooterView : UICollectionReusableView {
     }
     
     func setTransform(inTransform:CGAffineTransform, scaleFactor:CGFloat) {
+//        print("set transform")
         if isAnimatingFinal {
             return
         }
@@ -49,8 +41,19 @@ class CustomFooterView : UICollectionReusableView {
         self.refreshControlIndicator?.stopAnimating()
     }
     
+    func showIndicatorMaybe(show: Bool) {
+        if let loadingActivityIndicator = self.viewWithTag(5) {
+            if isAnimatingFinal {
+                loadingActivityIndicator.isHidden = false
+            } else {
+                loadingActivityIndicator.isHidden = true
+            }
+        }
+    }
+    
     //final animation to display loading
     func animateFinal() {
+        showIndicatorMaybe(show: isAnimatingFinal)
         if isAnimatingFinal {
             return
         }
