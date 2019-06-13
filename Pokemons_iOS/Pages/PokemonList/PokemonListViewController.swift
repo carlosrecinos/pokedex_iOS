@@ -38,14 +38,13 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     func setInitConfig() {
         pokemonListCollectionView.dataSource = self
         pokemonListCollectionView.delegate = self
+        pokemonListCollectionView.register(UINib(nibName: "CustomFooterView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
+        
         let spacing = CGFloat(20.0)
         let horizontalLayoutMargin = CGFloat(8.0)
         let width = (view.frame.size.width - spacing - CGFloat(horizontalLayoutMargin * 2)) / 3
         let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        
-            pokemonListCollectionView.register(UINib(nibName: "CustomFooterView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
 
-        
         layout.sectionInset = UIEdgeInsets(
             top: CGFloat(0),
             left: horizontalLayoutMargin,
@@ -71,22 +70,25 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     }
 
     func showFooter() {
-        isLoading = true
-        let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        animateFooterActivityIndicator()
+        updateCollectionViewLayoutFooterSize(size: footerSize!)
         
-        if let activityIndicator =
-            footerView?.viewWithTag(5) as! UIActivityIndicatorView? {
+    }
+    
+    func animateFooterActivityIndicator() {
+        if let activityIndicator = footerView?.viewWithTag(5) as! UIActivityIndicatorView? {
             activityIndicator.startAnimating()
         }
-        layout.footerReferenceSize = footerSize!
-        print("HEHEHE: \(layout.footerReferenceSize)")
+    }
+    
+    func updateCollectionViewLayoutFooterSize(size: CGSize) {
+        let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.footerReferenceSize = size
     }
     
     func removeFooter() {
-        isLoading = false
-        let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        
-        layout.footerReferenceSize = CGSize(width: 1, height: 0.5)
+        let noVisibleFooter = CGSize(width: 1, height: 0.1)
+        updateCollectionViewLayoutFooterSize(size: noVisibleFooter)
     }
 }
 
@@ -113,10 +115,10 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         var triggerThreshold  = Float((diffHeight - frameHeight))/Float(threshold);
         triggerThreshold   =  min(triggerThreshold, 0.0)
         let pullRatio  = min(abs(triggerThreshold),1.0);
-        if pullRatio >= 1 && !isLoading {
+        
+        if (pullRatio >= 1) && !isLoading {
             requestNewPokemonsList()
         }
-        print("pullRation:\(pullRatio)")
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
