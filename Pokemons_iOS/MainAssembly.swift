@@ -20,7 +20,8 @@ class MainAssembly: Assembly {
         container.register(AuthenticationServiceProtocol.self) { resolver in
             let authenticationService = AuthenticationService()
             let networking = resolver.resolve(HttpNetworking.self)!
-            authenticationService.inject(networking: networking)
+            let keychain = KeychainManager()
+            authenticationService.inject(networking: networking, keychainManager: keychain)
             return authenticationService
         }
         
