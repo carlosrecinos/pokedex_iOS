@@ -1,5 +1,5 @@
 import UIKit
 
-class CustomFooterView : UICollectionReusableView {
+class PokemonListFooterActivityIndicator : UICollectionReusableView {
     
 }
