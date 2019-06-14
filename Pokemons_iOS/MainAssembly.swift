@@ -32,9 +32,24 @@ class MainAssembly: Assembly {
             pokemonService.inject(networking: networking)
             return pokemonService
         }
+        
+        
         registerLoginPage(to: container)
         registerPokemonListPage(to: container)
+        registerRootPage(to: container)
     }
+    
+    func registerRootPage(to container: Container) {
+        container.storyboardInitCompleted(RootViewController.self) { (resolver, viewController) in
+            let loginPage = resolver.resolve(LoginViewController.self)
+            let mainPage = resolver.resolve(PokemonListViewController.self)
+            let keychainManager = resolver.resolve(KeychainManager.self)
+            viewController.keychainManager = keychainManager
+            viewController.mainPage = mainPage
+            viewController.loginPage = loginPage
+        }
+    }
+    
     
     func registerLoginPage(to container: Container) {
         container.storyboardInitCompleted(LoginViewController.self) {(resolver, viewController) in

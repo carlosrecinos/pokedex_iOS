@@ -55,6 +55,15 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
     @IBOutlet weak var yellowPokeballImageView: UIImageView!
     
     
+    @IBAction func clearButtonPressed(_ sender: Any) {
+        let keyManager = KeychainManager()
+        
+        do {
+            let t = try keyManager.deleteToken(username: "carlosrecinos")
+        } catch let error {
+            print(error)
+        }
+    }
     
     override func viewDidLoad() {
         setInitConfig()

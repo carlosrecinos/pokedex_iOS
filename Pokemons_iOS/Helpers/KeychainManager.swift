@@ -8,6 +8,7 @@ enum KeychainError: Error {
 
 enum KeychainActions {
     case add
+    case checkIfExists
     case search
     case update
     case delete
@@ -20,11 +21,9 @@ class KeychainManager {
         do {
             let savedDictionary = try searchToken(username: username)
             
-            if savedDictionary == nil {
-                print("already saved")
+            if savedDictionary != nil {
                 isSuccess = true
             } else {
-                print("to save key")
                 try saveKeychain(username: username, token: token)
                 isSuccess = true
             }
@@ -34,6 +33,22 @@ class KeychainManager {
             print(unhandledError)
         }
         return isSuccess
+    }
+    
+    func isLogged() -> Bool {
+        var isLogged = false
+        do {
+            let query = try prepareKeychainQuery(username: nil, action: .checkIfExists, token: nil)
+            var item: CFTypeRef?
+            let status = SecItemCopyMatching(query as CFDictionary, &item)
+            if status == errSecSuccess {
+                isLogged = true
+            }
+            
+        } catch let error {
+            print(error)
+        }
+        return isLogged
     }
     
     func searchToken(username: String) throws -> [String: Any]? {
@@ -51,6 +66,7 @@ class KeychainManager {
         do {
             let query = try prepareKeychainQuery(username: username, action: .delete, token: nil)
             let status = SecItemDelete(query as CFDictionary)
+            
             guard status == errSecSuccess || status == errSecItemNotFound else {
                 throw KeychainError.unhandledError(status: status)
             }
@@ -74,20 +90,30 @@ class KeychainManager {
         }
     }
     
-    func prepareKeychainQuery(username: String, action: KeychainActions, token: String?) throws -> [String: Any] {
+    func prepareKeychainQuery(username: String?, action: KeychainActions, token: String?) throws -> [String: Any] {
         var query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
-                                    kSecAttrAccount as String: username]
+                                    kSecAttrLabel as String: "loggedUser"]
+        
         switch action {
-            
+        case .delete:
+            query[kSecAttrAccount as String] = nil
+            break
         case .add:
             guard let token = token else {
                 throw KeychainError.noToken
             }
             query[kSecAttrGeneric as String] = token
-        case .search, .delete, .update:
+            query[kSecAttrAccount as String] = username
+            break
+        case .checkIfExists:
             query[kSecMatchLimit as String] = kSecMatchLimitOne
-            query[kSecReturnAttributes as String] = false
-            query[kSecReturnData as String] = true
+            query[kSecReturnAttributes as String] = true
+            break
+        case .search, .update:
+            query[kSecMatchLimit as String] = kSecMatchLimitOne
+            query[kSecReturnAttributes as String] = true
+            query[kSecAttrAccount as String] = username
+            break
         }
         
         return query

@@ -20,14 +20,13 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     var pokemonListViewController: PokemonListViewControllerProtocol?
     var pokemonListInteractor: PokemonListInteractorProtocol?
     var offset = 0
-    var limit = 12
+    var limit = 29
     
     func inject(interactor: PokemonListInteractorProtocol) {
         pokemonListInteractor = interactor
     }
     
     func fetchPokemons() {
-        print(offset, limit)
         pokemonListInteractor?.fetchPokemons(offset: offset, limit: limit)
     }
     
@@ -37,7 +36,7 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     }
     
     func updateOffsetCounter() {
-        offset += 12 + 2
+        offset += limit + 2
         
     }
     

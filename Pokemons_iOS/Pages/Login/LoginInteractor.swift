@@ -30,6 +30,5 @@ class LoginInteractor: LoginInteractorProtocol {
             .onFailure(callback: { error in
                 self.loginPresenter?.showAuthFailedErrorMessage()
             })
-        
     }
 }

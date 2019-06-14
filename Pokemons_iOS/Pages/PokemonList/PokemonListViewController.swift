@@ -45,7 +45,6 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         let horizontalLayoutMargin = CGFloat(8.0)
         let width = (view.frame.size.width - spacing - CGFloat(horizontalLayoutMargin * 2)) / 3
         let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        print(width)
         
         pokemonListCollectionView.register(UINib(nibName: "CustomFooterView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerViewReuseIdentifier)
         
