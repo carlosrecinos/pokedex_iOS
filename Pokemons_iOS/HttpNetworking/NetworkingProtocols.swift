@@ -23,4 +23,6 @@ struct HttpResponse {
 protocol HttpNetworking {
     func request(url: String, httpHeaders: [String:String]) -> Future<HttpResponse, NetworkingError>
     func request(url: String) -> Future<HttpResponse, NetworkingError>
+    
+    func post(url: String, httpHeaders: [String: String]?, parameters: [String: Any]) -> Future<HttpResponse, NetworkingError>
 }

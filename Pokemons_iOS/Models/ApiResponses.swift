@@ -10,13 +10,23 @@ import Foundation
 
 
 struct PokemonsResponse: Decodable {
-    var error: Bool?
-    var data: PokeapiPayload?
+    let error: Bool
+    let data: PokeapiPayload?
 }
 
 struct PokeapiPayload: Decodable {
-    var count: Int?
+    let count: Int?
     var next: String?
     var previous: String?
     var results: [Pokemon]?
+}
+
+struct LoginResponse: Decodable {
+    let error: Bool
+    let data: LoginPayload
+}
+
+struct LoginPayload: Decodable {
+    let user: User
+    let loginToken: String
 }

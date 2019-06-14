@@ -9,7 +9,6 @@
 import Foundation
 import Swinject
 
-
 class MainAssembly: Assembly {
     func assemble(container: Container) {
         // Networking

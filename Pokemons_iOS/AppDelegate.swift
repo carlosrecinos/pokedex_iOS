@@ -51,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let preferences = UserDefaults.standard
         let isLogged = preferences.bool(forKey: "isLogged")
         print("isLogged: ", isLogged)
-//        return isLogged
-        return true
+        return isLogged
+//        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
