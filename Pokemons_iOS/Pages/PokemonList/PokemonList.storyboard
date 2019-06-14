@@ -29,7 +29,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CTa-TG-HSQ">
                                     <size key="itemSize" width="369" height="273"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="1"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -52,8 +52,11 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdE-3e-gVR">
                                                                     <rect key="frame" x="0.0" y="136.5" width="369" height="136.5"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQH-pm-QI9">
-                                                                            <rect key="frame" x="0.0" y="8" width="369" height="24"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQH-pm-QI9">
+                                                                            <rect key="frame" x="12" y="8" width="39.5" height="24"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="24" id="XzO-JZ-VHe"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="16"/>
                                                                             <color key="textColor" red="1" green="0.79607843137254897" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -63,8 +66,9 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="pQH-pm-QI9" secondAttribute="trailing" id="2c3-g2-Xzw"/>
-                                                                        <constraint firstItem="pQH-pm-QI9" firstAttribute="leading" secondItem="QdE-3e-gVR" secondAttribute="leading" id="pLq-QN-n3Z"/>
+                                                                        <constraint firstItem="pQH-pm-QI9" firstAttribute="top" secondItem="QdE-3e-gVR" secondAttribute="topMargin" id="1U7-9f-saP"/>
+                                                                        <constraint firstItem="pQH-pm-QI9" firstAttribute="leading" relation="lessThanOrEqual" secondItem="QdE-3e-gVR" secondAttribute="leading" priority="750" constant="12" id="ZEi-7s-cfg"/>
+                                                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="pQH-pm-QI9" secondAttribute="trailing" priority="250" constant="12" id="nQH-lN-xXT"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -93,6 +97,10 @@
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rDU-wL-yZb">
+                                    <rect key="frame" x="0.0" y="273" width="414" height="1"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
