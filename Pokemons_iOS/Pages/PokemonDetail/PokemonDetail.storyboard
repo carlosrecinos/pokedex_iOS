@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P1y-hu-OJr">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="pokemonSolidFont.ttf">
+            <string>PokemonSolidNormal</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Pokemon Detail View Controller-->
+        <scene sceneID="30k-pP-UVI">
+            <objects>
+                <viewController id="P1y-hu-OJr" customClass="PokemonDetailViewController" customModule="Pokemons_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lDw-5q-8g6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WcB-86-gFU">
+                                <rect key="frame" x="0.0" y="505" width="414" height="357"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt7-64-a4c">
+                                        <rect key="frame" x="12" y="16" width="390" height="37.5"/>
+                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="26"/>
+                                        <color key="textColor" red="1" green="0.79607843140000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.1137254902" green="0.17254901959999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="2" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qt7-64-a4c" firstAttribute="top" secondItem="WcB-86-gFU" secondAttribute="top" constant="16" id="1Pm-H5-dCA"/>
+                                    <constraint firstAttribute="trailing" secondItem="qt7-64-a4c" secondAttribute="trailing" constant="12" id="kLC-Jj-yid"/>
+                                    <constraint firstItem="qt7-64-a4c" firstAttribute="leading" secondItem="WcB-86-gFU" secondAttribute="leading" constant="12" id="qH0-eS-zcV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="WcB-86-gFU" firstAttribute="top" secondItem="sqT-Iv-MyU" secondAttribute="top" constant="461" id="3tt-3D-LbT"/>
+                            <constraint firstItem="WcB-86-gFU" firstAttribute="bottom" secondItem="sqT-Iv-MyU" secondAttribute="bottom" id="BGr-Xt-xye"/>
+                            <constraint firstItem="WcB-86-gFU" firstAttribute="trailing" secondItem="sqT-Iv-MyU" secondAttribute="trailing" id="XHw-Rk-hL7"/>
+                            <constraint firstItem="WcB-86-gFU" firstAttribute="leading" secondItem="sqT-Iv-MyU" secondAttribute="leading" id="h6m-0J-KOA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sqT-Iv-MyU"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="qt7-64-a4c" id="PTv-wM-at8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pof-6C-Mdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="888" y="25"/>
+        </scene>
+    </scenes>
+</document>

@@ -15,6 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func initTheme() {
+        // TODO
+        let customFont = UIFont(name: "Pokemon Solir", size: 17.0)!
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+    }
+    
     func shouldGoToMain() {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()

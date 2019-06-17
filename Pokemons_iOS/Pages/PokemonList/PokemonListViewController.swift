@@ -36,19 +36,36 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     }
     
     func setInitConfig() {
+        
+        let tabBarItem = UITabBarItem(title: "Pokemons", image: UIImage(named: "pokeball_icon"), tag: 0)
+        
+        self.navigationItem.title = "Pokemons"
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.tabBarItem = tabBarItem
+        
+        self.tabBarController?.tabBar.tintColor = UIColor.pokeRed
+        self.tabBarController?.tabBar.isTranslucent = false
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.pokeRed
+        self.navigationController?.navigationBar.tintColor = UIColor.pokeYellow
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_icon"), style: .done, target: self, action: nil)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
+
+        
         pokemonListCollectionView.dataSource = self
         pokemonListCollectionView.delegate = self
         pokemonListCollectionView.register(UINib(nibName: "LoadingFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
         
-        let spacing = CGFloat(20.0)
+        let spacing = CGFloat(10.0)
         let horizontalLayoutMargin = CGFloat(8.0)
-        let width = (view.frame.size.width - spacing - CGFloat(horizontalLayoutMargin * 2)) / 3
+        let width = (view.frame.size.width - spacing - CGFloat(horizontalLayoutMargin * 2)) / 2
         let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         pokemonListCollectionView.register(UINib(nibName: "LoadingFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
         
         layout.sectionInset = UIEdgeInsets(
-            top: CGFloat(0),
+            top: CGFloat(16),
             left: horizontalLayoutMargin,
             bottom: CGFloat(0),
             right: horizontalLayoutMargin)
@@ -67,18 +84,25 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     func updatePokemonsList(pokemons: [Pokemon]) {
         isLoading = false
+        let initialArrayCount = pokemonsList.count
         pokemonsList += pokemons
+//        let indexToAdd = pokemonsList.count == 0 ? 0 : pokemonsList.count - 1
+//        let indexPath = IndexPath(row: indexToAdd, section: 0)
+//        pokemonListCollectionView.insertItems(at: [indexPath])
         pokemonListCollectionView.reloadData()
     }
 
     func showFooter() {
         animateFooterActivityIndicator()
+        
         updateCollectionViewLayoutFooterSize(size: footerSize!)
         
     }
     
     func animateFooterActivityIndicator() {
-        if let activityIndicator = footerView?.viewWithTag(5) as! UIActivityIndicatorView? {
+        print("before to")
+    if let activityIndicator = footerView?.viewWithTag(5) as! UIActivityIndicatorView? {
+        print("to animate")
             activityIndicator.startAnimating()
         }
     }
@@ -91,6 +115,12 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     func removeFooter() {
         let noVisibleFooter = CGSize(width: 1, height: 0.1)
         updateCollectionViewLayoutFooterSize(size: noVisibleFooter)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? PokemonDetailViewController, let index = sender as? IndexPath {
+            destination.selectedPokemon = pokemonsList[index.row]
+        }
     }
 }
 
@@ -140,6 +170,10 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
             pokemonNameLabel.text = pokemonsList[indexPath.row].name
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailSegue", sender: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView,

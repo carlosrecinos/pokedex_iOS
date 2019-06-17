@@ -19,9 +19,8 @@ class KeychainManager {
     func saveToken(username: String, token: String) -> Bool {
         var isSuccess = false
         do {
-            let savedDictionary = try searchToken(username: username)
-            
-            if savedDictionary != nil {
+            let tokenExists = try searchToken(username: username)
+            if tokenExists {
                 isSuccess = true
             } else {
                 try saveKeychain(username: username, token: token)
@@ -51,12 +50,19 @@ class KeychainManager {
         return isLogged
     }
     
-    func searchToken(username: String) throws -> [String: Any]? {
+    /// Returns false if the token does not exist
+    func searchToken(username: String) throws -> Bool {
         do {
             var item: CFTypeRef?
             let query = try prepareKeychainQuery(username: username, action: .search, token: nil)
             SecItemCopyMatching(query as CFDictionary, &item)
-            return item as? [String: Any]
+            let castedItem = item as? [String: Any]
+            
+            if castedItem != nil {
+                return true
+            }
+            
+            return false
         } catch let error as KeychainError {
             throw error
         }

@@ -80,7 +80,6 @@ class MainAssembly: Assembly {
     
     func registerPokemonListPage(to container: Container) {
         container.storyboardInitCompleted(PokemonListViewController.self) { (resolver, pokemonListViewController) in
-            
             var presenter = resolver.resolve(PokemonListPresenterProtocol.self)!
             presenter.pokemonListViewController = pokemonListViewController
             pokemonListViewController.inject(presenter: presenter)
