@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="pokemonSolidFont.ttf">
+            <string>PokemonSolidNormal</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SlideViewController" customModule="Pokemons_iOS" customModuleProvider="target">
             <connections>
@@ -21,26 +26,30 @@
             <rect key="frame" x="0.0" y="0.0" width="435" height="432"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="185-s1-1fD">
-                    <rect key="frame" x="24" y="24" width="387" height="209"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgB-mg-GKD">
-                    <rect key="frame" x="24" y="333" width="387" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="24" y="328.5" width="387" height="25.5"/>
+                    <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="185-s1-1fD">
+                    <rect key="frame" x="64" y="50" width="307" height="228.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="750" constant="228.5" id="4yc-Jk-gZl"/>
+                        <constraint firstAttribute="width" priority="750" constant="307" id="O38-PW-aDz"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="wgB-mg-GKD" firstAttribute="top" secondItem="185-s1-1fD" secondAttribute="bottom" constant="100" id="1d9-d5-lNK"/>
+                <constraint firstItem="wgB-mg-GKD" firstAttribute="top" secondItem="185-s1-1fD" secondAttribute="bottom" priority="250" constant="50" id="1d9-d5-lNK"/>
                 <constraint firstItem="wgB-mg-GKD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="2II-R5-ybq"/>
-                <constraint firstAttribute="trailing" secondItem="185-s1-1fD" secondAttribute="trailing" constant="24" id="4Qr-mN-D0V"/>
-                <constraint firstItem="185-s1-1fD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="FOv-AL-S91"/>
-                <constraint firstItem="185-s1-1fD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="Ncx-sd-aSY"/>
+                <constraint firstAttribute="trailing" secondItem="185-s1-1fD" secondAttribute="trailing" priority="750" constant="64" id="4Qr-mN-D0V"/>
+                <constraint firstItem="185-s1-1fD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="250" constant="50" id="FOv-AL-S91"/>
+                <constraint firstItem="185-s1-1fD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="750" constant="64" id="Ncx-sd-aSY"/>
                 <constraint firstAttribute="trailing" secondItem="wgB-mg-GKD" secondAttribute="trailing" constant="24" id="Rgj-DJ-vNE"/>
-                <constraint firstAttribute="bottom" secondItem="wgB-mg-GKD" secondAttribute="bottom" constant="78" id="kWe-JT-g83"/>
+                <constraint firstAttribute="bottom" secondItem="wgB-mg-GKD" secondAttribute="bottom" priority="250" constant="78" id="kWe-JT-g83"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="63.04347826086957" y="-77.008928571428569"/>

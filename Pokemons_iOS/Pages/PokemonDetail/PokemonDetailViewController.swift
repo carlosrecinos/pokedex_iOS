@@ -28,13 +28,6 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
     func initConfig() {
         navigationController?.view.backgroundColor = UIColor.groupTableViewBackground
         self.navigationItem.largeTitleDisplayMode = .never
-        let backButton = UIBarButtonItem(title: "< Pokemons", style: UIBarButtonItem.Style.plain, target: self, action: nil)
-        if let pokemonFont = UIFont(name: "Pokemon Solid", size: 20) {
-            print("new font")
-            backButton.setTitleTextAttributes([NSAttributedString.Key.font: pokemonFont], for: UIControl.State.normal)
-            
-        }
-        
         self.navigationItem.leftBarButtonItem?.title = nil
         self.navigationItem.backBarButtonItem?.title = nil
         

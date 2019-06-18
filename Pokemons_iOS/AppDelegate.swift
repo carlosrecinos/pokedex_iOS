@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initTheme() {
         // TODO
         let customFont = UIFont(name: "Pokemon Solid", size: 17.0)!
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: [.normal])
     }
     
     func shouldGoToMain() {
