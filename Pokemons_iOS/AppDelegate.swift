@@ -11,13 +11,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         shouldGoToMain()
-        
+        initTheme()
         return true
     }
     
     func initTheme() {
         // TODO
-        let customFont = UIFont(name: "Pokemon Solir", size: 17.0)!
+        let customFont = UIFont(name: "Pokemon Solid", size: 17.0)!
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
     }
     

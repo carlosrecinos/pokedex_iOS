@@ -17,7 +17,7 @@ enum PokemonServiceError: Error {
 
 protocol PokemonServiceProtocol {
     func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError>
-//    func fetchPokemon(pokemonId: Int) -> Future<[Pokemon], PokemonServiceError>
+    func fetchPokemon(pokemonId: Int) -> Future<[Pokemon], PokemonServiceError>
 }
 
 class PokemonService: PokemonServiceProtocol {
@@ -55,7 +55,7 @@ class PokemonService: PokemonServiceProtocol {
         return promise.future
     }
     
-//    func fetchPokemon(pokemonId: Int) -> Future<[Pokemon], PokemonServiceError> {
-//
-//    }
+    func fetchPokemon(pokemonId: Int) -> Future<PokemonDetail>, PokemonServiceError> {
+
+    }
 }

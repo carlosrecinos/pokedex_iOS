@@ -1,64 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P1y-hu-OJr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="P1y-hu-OJr">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="pokemonSolidFont.ttf">
-            <string>PokemonSolidNormal</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Pokemon Detail View Controller-->
         <scene sceneID="30k-pP-UVI">
             <objects>
                 <viewController id="P1y-hu-OJr" customClass="PokemonDetailViewController" customModule="Pokemons_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ciH-Dx-t4O"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dl0-0P-ci2"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lDw-5q-8g6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WcB-86-gFU">
-                                <rect key="frame" x="0.0" y="505" width="414" height="357"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KM2-L4-zGs">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt7-64-a4c">
-                                        <rect key="frame" x="12" y="16" width="390" height="37.5"/>
-                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="26"/>
-                                        <color key="textColor" red="1" green="0.79607843140000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.1137254902" green="0.17254901959999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="shadowOffset" width="2" height="1"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRl-kM-bbB" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="851"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpX-Ng-OCB">
+                                                <rect key="frame" x="0.0" y="400" width="414" height="451"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLo-C2-GEP">
+                                                        <rect key="frame" x="20" y="12" width="374" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBU-ic-MIh">
+                                                        <rect key="frame" x="20" y="410" width="374" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="JBU-ic-MIh" secondAttribute="bottom" constant="20" id="4Bb-Wp-flu"/>
+                                                    <constraint firstItem="HLo-C2-GEP" firstAttribute="top" secondItem="lpX-Ng-OCB" secondAttribute="top" constant="12" id="Axf-hh-LuD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HLo-C2-GEP" secondAttribute="trailing" constant="20" id="D36-kb-n08"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JBU-ic-MIh" secondAttribute="trailing" constant="20" id="Ltv-hq-C8e"/>
+                                                    <constraint firstItem="JBU-ic-MIh" firstAttribute="leading" secondItem="lpX-Ng-OCB" secondAttribute="leading" constant="20" id="XFP-7L-KMT"/>
+                                                    <constraint firstItem="HLo-C2-GEP" firstAttribute="leading" secondItem="lpX-Ng-OCB" secondAttribute="leading" constant="20" id="Zk4-ps-TFS"/>
+                                                    <constraint firstItem="JBU-ic-MIh" firstAttribute="top" secondItem="HLo-C2-GEP" secondAttribute="bottom" constant="377" id="p3v-VK-NuK"/>
+                                                </constraints>
+                                            </view>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEf-FI-j9Z">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="400" id="gS2-fw-btc"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="Qcp-Ne-1mt" kind="embed" identifier="SpritesViewSegue" id="XAT-t4-kdA"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="lpX-Ng-OCB" secondAttribute="trailing" id="2ba-6T-Kip"/>
+                                            <constraint firstItem="IEf-FI-j9Z" firstAttribute="leading" secondItem="FRl-kM-bbB" secondAttribute="leading" id="2ov-Mj-pen"/>
+                                            <constraint firstItem="IEf-FI-j9Z" firstAttribute="top" secondItem="FRl-kM-bbB" secondAttribute="top" id="DyS-fa-nw7"/>
+                                            <constraint firstAttribute="bottom" secondItem="lpX-Ng-OCB" secondAttribute="bottom" id="HV0-9e-jvv"/>
+                                            <constraint firstItem="lpX-Ng-OCB" firstAttribute="leading" secondItem="FRl-kM-bbB" secondAttribute="leading" id="g4X-kp-cA4"/>
+                                            <constraint firstAttribute="trailing" secondItem="IEf-FI-j9Z" secondAttribute="trailing" id="maq-fd-AkJ"/>
+                                            <constraint firstItem="lpX-Ng-OCB" firstAttribute="top" secondItem="IEf-FI-j9Z" secondAttribute="bottom" id="pBa-ja-oYy"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="qt7-64-a4c" firstAttribute="top" secondItem="WcB-86-gFU" secondAttribute="top" constant="16" id="1Pm-H5-dCA"/>
-                                    <constraint firstAttribute="trailing" secondItem="qt7-64-a4c" secondAttribute="trailing" constant="12" id="kLC-Jj-yid"/>
-                                    <constraint firstItem="qt7-64-a4c" firstAttribute="leading" secondItem="WcB-86-gFU" secondAttribute="leading" constant="12" id="qH0-eS-zcV"/>
+                                    <constraint firstAttribute="bottom" secondItem="FRl-kM-bbB" secondAttribute="bottom" id="1CQ-38-PJO"/>
+                                    <constraint firstAttribute="trailing" secondItem="FRl-kM-bbB" secondAttribute="trailing" id="Qyk-xG-D8S"/>
+                                    <constraint firstItem="FRl-kM-bbB" firstAttribute="width" secondItem="KM2-L4-zGs" secondAttribute="width" id="lwX-G6-q6o"/>
+                                    <constraint firstItem="FRl-kM-bbB" firstAttribute="leading" secondItem="KM2-L4-zGs" secondAttribute="leading" id="mQp-jG-CqE"/>
+                                    <constraint firstItem="FRl-kM-bbB" firstAttribute="height" secondItem="KM2-L4-zGs" secondAttribute="height" priority="250" id="uUH-b1-ekP"/>
+                                    <constraint firstItem="FRl-kM-bbB" firstAttribute="top" secondItem="KM2-L4-zGs" secondAttribute="top" id="x94-H1-SDe"/>
                                 </constraints>
-                            </view>
+                            </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WcB-86-gFU" firstAttribute="top" secondItem="sqT-Iv-MyU" secondAttribute="top" constant="461" id="3tt-3D-LbT"/>
-                            <constraint firstItem="WcB-86-gFU" firstAttribute="bottom" secondItem="sqT-Iv-MyU" secondAttribute="bottom" id="BGr-Xt-xye"/>
-                            <constraint firstItem="WcB-86-gFU" firstAttribute="trailing" secondItem="sqT-Iv-MyU" secondAttribute="trailing" id="XHw-Rk-hL7"/>
-                            <constraint firstItem="WcB-86-gFU" firstAttribute="leading" secondItem="sqT-Iv-MyU" secondAttribute="leading" id="h6m-0J-KOA"/>
+                            <constraint firstAttribute="trailing" secondItem="KM2-L4-zGs" secondAttribute="trailing" id="7l0-eo-2NE"/>
+                            <constraint firstItem="KM2-L4-zGs" firstAttribute="top" secondItem="ciH-Dx-t4O" secondAttribute="bottom" id="bZp-uq-udW"/>
+                            <constraint firstItem="Dl0-0P-ci2" firstAttribute="top" secondItem="KM2-L4-zGs" secondAttribute="bottom" id="mVV-Nu-a3J"/>
+                            <constraint firstItem="KM2-L4-zGs" firstAttribute="leading" secondItem="lDw-5q-8g6" secondAttribute="leading" id="nDS-Gi-KaH"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="sqT-Iv-MyU"/>
                     </view>
-                    <connections>
-                        <outlet property="nameLabel" destination="qt7-64-a4c" id="PTv-wM-at8"/>
-                    </connections>
+                    <size key="freeformSize" width="414" height="896"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pof-6C-Mdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="888" y="25"/>
+            <point key="canvasLocation" x="886.95652173913049" y="24.776785714285712"/>
+        </scene>
+        <!--Sprites Carousel View Controller-->
+        <scene sceneID="9bY-jX-mkf">
+            <objects>
+                <viewController id="Qcp-Ne-1mt" customClass="SpritesCarouselViewController" customModule="Pokemons_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6at-92-p9n"/>
+                        <viewControllerLayoutGuide type="bottom" id="0hh-oH-YAE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PZk-43-gmV">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0C-6i-b63">
+                                <rect key="frame" x="0.0" y="0.0" width="800" height="400"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="XHP-mR-OBO">
+                                <rect key="frame" x="380.5" y="317" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.93244327910000002" green="0.114458476" blue="0.23232188819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XHP-mR-OBO" firstAttribute="centerX" secondItem="PZk-43-gmV" secondAttribute="centerX" id="2HW-a1-Isb"/>
+                            <constraint firstItem="Z0C-6i-b63" firstAttribute="top" secondItem="PZk-43-gmV" secondAttribute="top" id="B9Q-1n-TSv"/>
+                            <constraint firstItem="Z0C-6i-b63" firstAttribute="width" secondItem="PZk-43-gmV" secondAttribute="width" id="CEg-jS-XJC"/>
+                            <constraint firstAttribute="trailing" secondItem="Z0C-6i-b63" secondAttribute="trailing" id="Lt7-9D-eu4"/>
+                            <constraint firstItem="Z0C-6i-b63" firstAttribute="leading" secondItem="PZk-43-gmV" secondAttribute="leading" id="Tt6-3y-WB5"/>
+                            <constraint firstAttribute="bottom" secondItem="Z0C-6i-b63" secondAttribute="bottom" id="W0W-cP-H6r"/>
+                            <constraint firstItem="0hh-oH-YAE" firstAttribute="top" secondItem="XHP-mR-OBO" secondAttribute="bottom" constant="12" id="hGE-vs-oaS"/>
+                            <constraint firstItem="Z0C-6i-b63" firstAttribute="height" secondItem="PZk-43-gmV" secondAttribute="height" priority="750" id="paS-cS-gSc"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="800" height="400"/>
+                    <connections>
+                        <outlet property="spritesPageControl" destination="XHP-mR-OBO" id="C4Y-WO-476"/>
+                        <outlet property="spritesScrollView" destination="Z0C-6i-b63" id="si6-L4-mlh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C8e-07-uPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2189.8550724637685" y="24.776785714285712"/>
         </scene>
     </scenes>
 </document>

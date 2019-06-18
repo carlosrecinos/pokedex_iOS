@@ -1,18 +1,17 @@
-//
-//  PokemonDetailViewController.swift
-//  Pokemons_iOS
-//
-//  Created by Carlos Recinos on 6/14/19.
-//  Copyright © 2019 genui. All rights reserved.
-//
-
 import UIKit
+
+protocol PokemonDetailViewControllerProtocol {
+    func loadInfo()
+}
 
 class PokemonDetailViewController: UIViewController {
 
     var selectedPokemon: Pokemon?
+    var spritesSegueIdentifier = "SpritesViewSegue"
+    var spritesCarouselViewController: SpritesCarouselViewController!
     
     @IBOutlet var nameLabel: UILabel?
+    @IBOutlet var contentScrollView: UIScrollView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +37,25 @@ class PokemonDetailViewController: UIViewController {
     
     func loadPokemonInfo() {
         nameLabel?.text = "selectedPokemon?.name"
+        loadSprites()
+        print("pokemon info loaded")
     }
     
+    func loadSprites() {
+        let sprites = [
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/30.png",
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/40.png",
+        ]
+        spritesCarouselViewController?.loadSprites(sprites)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SpritesCarouselViewController, segue.identifier == spritesSegueIdentifier {
+            self.spritesCarouselViewController = destination
+        }
+    }
 
     /*
     // MARK: - Navigation
