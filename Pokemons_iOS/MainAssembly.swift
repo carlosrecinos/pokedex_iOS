@@ -36,6 +36,7 @@ class MainAssembly: Assembly {
         
         registerLoginPage(to: container)
         registerPokemonListPage(to: container)
+        registerPokemonDetailPage(to: container)
         registerRootPage(to: container)
     }
     
@@ -101,6 +102,33 @@ class MainAssembly: Assembly {
             .initCompleted { resolver, interactor in
                 let pokemonListInteractor = interactor
                 pokemonListInteractor.pokemonListPresenter = resolver.resolve(PokemonListPresenterProtocol.self)
+        }
+    }
+    
+    func registerPokemonDetailPage(to container: Container) {
+        container.storyboardInitCompleted(PokemonDetailViewController.self) { (resolver, pokemonDetailViewController) in
+            var presenter = resolver.resolve(PokemonDetailPresenterProtocol.self)!
+            presenter.pokemonDetailViewController = pokemonDetailViewController
+            pokemonDetailViewController.inject(presenter: presenter)
+        }
+        
+        container.register(PokemonDetailPresenterProtocol.self) { resolver in
+            let interactor = resolver.resolve(PokemonDetailInteractor.self)!
+            let presenter = PokemonDetailPresenter()
+            presenter.inject(interactor: interactor)
+            return presenter
+        }
+        
+        container.register(PokemonDetailInteractor.self) {resolver in
+            let interactor = PokemonDetailInteractor()
+            let pokemonService = resolver.resolve(PokemonServiceProtocol.self)!
+            interactor.inject(pokemonService)
+            return interactor
+            }
+            .initCompleted { resolver, interactor in
+                let pokemonDetailInteractor = interactor
+                
+                pokemonDetailInteractor.pokemonDetailPresenter = resolver.resolve(PokemonDetailPresenterProtocol.self)
         }
     }
     

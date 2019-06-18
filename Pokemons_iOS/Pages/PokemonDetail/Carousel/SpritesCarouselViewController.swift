@@ -17,12 +17,24 @@ class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
     }
     
-    func loadSprites(_ sprites: [String]) {
+    func loadSprites(_ sprites: [String: String]) {
         self.slides = createSlides(sprites)
         setupSlides()
         spritesPageControl.numberOfPages = slides?.count ?? 0
         spritesPageControl.currentPage = 0
         view.bringSubviewToFront(spritesPageControl)
+    }
+    
+    func createSlides(_ sprites: [String: String]) -> [SlideViewController] {
+        var items: [SlideViewController] = []
+        
+        for (key, sprite) in sprites {
+            let scrollViewItem = SlideViewController()
+            scrollViewItem.nameLabel.text = key
+            scrollViewItem.imageView.imageFromURL(urlString: sprite, withSize: nil)
+            items.append(scrollViewItem)
+        }
+        return items
     }
     
     func setupSlides() {
@@ -32,23 +44,15 @@ class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
         spritesScrollView.isPagingEnabled = true
         
         for (index, item) in slides?.enumerated() ?? [].enumerated() {
-            item.frame = CGRect(x: view.frame.width * CGFloat(index), y: 0, width: view.frame.width, height: view.frame.height / 2)
-            item.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
-            item.nameLabel.text = "\(index)"
+            item.frame = CGRect(x: view.frame.width * CGFloat(index), y: 0, width: view.frame.width, height: view.frame.height / 1.5)
+            item.imageView.backgroundColor = UIColor.red
+            item.backgroundColor = UIColor.green
+            
+//            item.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
+            
             spritesScrollView.addSubview(item)
             
         }
-    }
-    
-    func createSlides(_ sprites: [String]) -> [SlideViewController] {
-        var items: [SlideViewController] = []
-        
-        for sprite in sprites {
-            let scrollViewItem = SlideViewController()
-            scrollViewItem.nameLabel.text = sprite
-            items.append(scrollViewItem)
-        }
-        return items
     }
     
 }

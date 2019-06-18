@@ -17,7 +17,7 @@ enum PokemonServiceError: Error {
 
 protocol PokemonServiceProtocol {
     func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError>
-    func fetchPokemon(pokemonId: Int) -> Future<[Pokemon], PokemonServiceError>
+    func fetchPokemon(_ id: Int) -> Future<PokemonDetail, PokemonServiceError>
 }
 
 class PokemonService: PokemonServiceProtocol {
@@ -29,20 +29,46 @@ class PokemonService: PokemonServiceProtocol {
     
     func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError> {
         let promise = Promise<[Pokemon], PokemonServiceError>()
-        let url = "https://recinospokedex.herokuapp.com/api/pokemon/?offset=\(offset)&&limit=\(limit)"
+        let url = "\(HelperStrings.baseUrl)/api/pokemon/?offset=\(offset)&&limit=\(limit)"
         
         networking?.request(url: url)
             .onSuccess(callback: { response in
                 if let jsonData = response.data {
                     do {
-                        let pokemonsResponse = try JSONDecoder().decode(PokemonsResponse.self, from: jsonData)
+                        
+                        let pokemonsResponse = try JSONDecoder().decode(PokemonsApiResponse.self, from: jsonData)
                         let pokemons = pokemonsResponse.data?.results!
                         if let pokemons = pokemons {
                             promise.success(pokemons)
                         } else {
                             promise.success([])
                         }
-                    } catch {
+                    } catch let error {
+                        print(error)
+                        promise.failure(.decodingFailure)
+                    }
+                } else {
+                    promise.failure(.serviceError)
+                }
+            })
+            .onFailure { error in
+                print("errorASASD")
+        }
+        return promise.future
+    }
+    
+    func fetchPokemon(_ id: Int) -> Future<PokemonDetail, PokemonServiceError> {
+        let promise = Promise<PokemonDetail, PokemonServiceError>()
+        let url = "\(HelperStrings.baseUrl)/api/pokemon/\(id)"
+        networking?.request(url: url)
+            .onSuccess(callback: { response in
+                if let jsonData = response.data {
+                    do {
+                        let detailResponse = try JSONDecoder().decode(PokemonDetailApiResponse.self, from: jsonData)
+                        let pokemonDetail = detailResponse.data
+                        promise.success(pokemonDetail)
+                    } catch let error {
+                        print(error)
                         promise.failure(.decodingFailure)
                     }
                 } else {
@@ -53,9 +79,5 @@ class PokemonService: PokemonServiceProtocol {
                 print(error)
         }
         return promise.future
-    }
-    
-    func fetchPokemon(pokemonId: Int) -> Future<PokemonDetail>, PokemonServiceError> {
-
     }
 }

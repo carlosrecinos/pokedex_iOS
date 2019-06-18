@@ -12,9 +12,9 @@ struct Pokemon: Decodable {
     var id: Int?
     var name: String
     var url: String
-    var detail: PokemonDetail
+    var detail: PokemonDetail?
     
-    private func getPokemonId() -> Int? {
+    func getPokemonId() -> Int? {
         let urlWithouLastSlash = url.dropLast()
         let idIndex = url.index(after: urlWithouLastSlash.lastIndex(of: "/")!)
         let range = idIndex..<urlWithouLastSlash.endIndex
@@ -31,15 +31,24 @@ struct Pokemon: Decodable {
 }
 
 struct PokemonDetail: Decodable {
-    var generation: Int
-    var type: String
+    var types: [Types]?
     var height: Int?
-    var stats: PokemonStats?
+    var stats: [PokemonStats]?
     var sprites: Sprites?
-    var measureUnits: MeasureUnits
+    var measureUnits: MeasureUnits?
 }
 
-struct Sprites: Decodable {
+struct Types: Decodable {
+    var slot: Int
+    var type: Type
+}
+
+struct Type: Decodable {
+    var name: String
+    var url: String
+}
+
+struct Sprites: Decodable, Loopable {
     var back_default: String?
     var back_female: String?
     var back_shiny: String?
@@ -64,4 +73,32 @@ struct Stat: Decodable {
 struct MeasureUnits: Decodable {
     static var height =  "Dm"
     static var weight = "Hg"
+}
+
+protocol Loopable {
+    func allProperties() throws -> [String: Any]
+}
+
+extension Loopable {
+    func allProperties() throws -> [String: Any] {
+        
+        var result: [String: Any] = [:]
+        
+        let mirror = Mirror(reflecting: self)
+        
+        // Optional check to make sure we're iterating over a struct or class
+        guard let style = mirror.displayStyle, style == .struct || style == .class else {
+            throw NSError()
+        }
+        
+        for (property, value) in mirror.children {
+            guard let property = property else {
+                continue
+            }
+            
+            result[property] = value
+        }
+        
+        return result
+    }
 }

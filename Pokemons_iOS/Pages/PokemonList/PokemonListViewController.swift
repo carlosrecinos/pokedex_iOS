@@ -164,7 +164,7 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         }
         if let pokemonImageView = cell.viewWithTag(1) as? UIImageView {
             let imageUrl = pokemonsList[indexPath.row].getImageUrl()
-            pokemonImageView.imageFromURL(urlString: imageUrl)
+            pokemonImageView.imageFromURL(urlString: imageUrl, withSize: CGSize(width: 100, height: 100))
         }
         if let pokemonNameLabel = cell.viewWithTag(2) as? UILabel {
             pokemonNameLabel.text = pokemonsList[indexPath.row].name

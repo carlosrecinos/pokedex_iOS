@@ -1,14 +1,16 @@
 import UIKit
 
 protocol PokemonDetailViewControllerProtocol {
-    func loadInfo()
+    func loadPokemonDetail(_ detail: PokemonDetail)
+    func inject(presenter: PokemonDetailPresenterProtocol)
 }
 
-class PokemonDetailViewController: UIViewController {
+class PokemonDetailViewController: UIViewController, PokemonDetailViewControllerProtocol {
 
     var selectedPokemon: Pokemon?
     var spritesSegueIdentifier = "SpritesViewSegue"
     var spritesCarouselViewController: SpritesCarouselViewController!
+    var pokemonDetailPresenter: PokemonDetailPresenterProtocol?
     
     @IBOutlet var nameLabel: UILabel?
     @IBOutlet var contentScrollView: UIScrollView?
@@ -17,7 +19,10 @@ class PokemonDetailViewController: UIViewController {
         super.viewDidLoad()
         initConfig()
         loadPokemonInfo()
-        // Do any additional setup after loading the view.
+    }
+    
+    func inject(presenter: PokemonDetailPresenterProtocol) {
+        pokemonDetailPresenter = presenter
     }
     
     func initConfig() {
@@ -36,18 +41,45 @@ class PokemonDetailViewController: UIViewController {
     }
     
     func loadPokemonInfo() {
-        nameLabel?.text = "selectedPokemon?.name"
+        nameLabel?.text = selectedPokemon?.name
+        requestDetail()
+        print("pokemon info loading...")
+    }
+    
+    func requestDetail() {
+        pokemonDetailPresenter?.getDetail(selectedPokemon?.getPokemonId() ?? 1)
+    }
+    
+    func loadPokemonDetail(_ detail: PokemonDetail) {
+        print("view has the data!!!")
+        selectedPokemon?.detail = detail
+        showDetailData()
+    }
+    
+    func showDetailData() {
+        
         loadSprites()
-        print("pokemon info loaded")
     }
     
     func loadSprites() {
-        let sprites = [
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/female/30.png",
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/40.png",
-        ]
+        let sprites = getSprites()
         spritesCarouselViewController?.loadSprites(sprites)
+    }
+    
+    func getSprites() -> [String: String] {
+        var dictionary: [String: String] = [:]
+        do {
+            let temporalDictionary = try selectedPokemon?.detail?.sprites?.allProperties()
+            if let temporalDictionary = temporalDictionary {
+                for (key, value) in temporalDictionary {
+                    dictionary[key] = value as? String
+                }
+            }
+        } catch let error {
+            print("Error getting sprites", error)
+        }
+        print("dics", dictionary)
+        return dictionary
     }
     
     
@@ -56,15 +88,4 @@ class PokemonDetailViewController: UIViewController {
             self.spritesCarouselViewController = destination
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
