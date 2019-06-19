@@ -65,19 +65,19 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
         if let types = selectedPokemon?.detail?.types {
             for type in types {
                 let typeImageView = createTypeImageView(type.type.name)
-//                typesStackView?.addSubview(typeImageView)
-                
+                typeImageView.translatesAutoresizingMaskIntoConstraints = false
                 typesStackView?.addArrangedSubview(typeImageView)
+                
             }
         }
     }
     
     func createTypeImageView(_ type: String) -> UIImageView {
         let image = UIImageView()
-        image.frame = CGRect(x: 0, y: 0, width: 80, height: 93.75)
-        image.bounds = image.frame.insetBy(dx: 20, dy: 20.0)
-        image.heightAnchor.constraint(equalToConstant: 93.75).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        
+        image.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        
         let imageUrl = "\(Constants.baseUrl)/images/\(type).png"
         image.imageFromURL(urlString: imageUrl, withSize: nil)
         
