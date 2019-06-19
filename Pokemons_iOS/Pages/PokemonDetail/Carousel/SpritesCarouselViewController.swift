@@ -32,6 +32,7 @@ class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
         for (key, sprite) in sprites {
             let scrollViewItem = SlideViewController()
             scrollViewItem.nameLabel.text = key
+            scrollViewItem.nameLabel.textColor = UIColor.pokeBlue
             scrollViewItem.imageView.imageFromURL(urlString: sprite, withSize: nil)
 
             items.append(scrollViewItem)

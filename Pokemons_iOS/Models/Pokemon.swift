@@ -57,6 +57,20 @@ struct Sprites: Decodable, Loopable {
     var front_female: String?
     var front_shiny: String?
     var front_shiny_female: String?
+    
+    func getSprites() -> [String: String] {
+        var dictionary: [String: String] = [:]
+        do {
+            let temporalDictionary = try self.allProperties()
+            for (key, value) in temporalDictionary {
+                dictionary[key] = value as? String
+            }
+        } catch let error {
+            print("Error getting sprites", error)
+        }
+        print("dics", dictionary)
+        return dictionary
+    }
 }
 
 struct PokemonStats: Decodable {

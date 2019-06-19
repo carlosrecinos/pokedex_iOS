@@ -96,5 +96,6 @@ extension UIColor {
     static let pokeBlue = UIColor(netHex: 0x1D2C5E)
     static let pokeYellow = UIColor(netHex: 0xFFCB06)
     static let pokeRed = UIColor(netHex: 0xC02D35)
+    static let pokeRedDarker = UIColor(netHex: 0x9B2027)
     
 }

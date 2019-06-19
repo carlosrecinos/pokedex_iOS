@@ -1,11 +1,3 @@
-//
-//  PokemonListViewController.swift
-//  Pokemons_iOS
-//
-//  Created by Carlos Recinos on 6/7/19.
-//  Copyright © 2019 genui. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -36,7 +28,8 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     }
     
     func setInitConfig() {
-        
+        // TODO
+//        self.delega
         let tabBarItem = UITabBarItem(title: "Pokemons", image: UIImage(named: "pokeball_icon"), tag: 0)
         
         self.navigationItem.title = "Pokemons"
@@ -121,6 +114,13 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         if let destination = segue.destination as? PokemonDetailViewController, let index = sender as? IndexPath {
             destination.selectedPokemon = pokemonsList[index.row]
         }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        pokemonListCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0),
+                                          at: .top,
+                                          animated: true)
     }
 }
 

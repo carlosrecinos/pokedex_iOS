@@ -1,6 +1,6 @@
 import Foundation
 
 
-struct HelperStrings {
+struct Constants {
     static var baseUrl = "https://recinospokedex.herokuapp.com"
 }

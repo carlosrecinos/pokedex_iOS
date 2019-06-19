@@ -29,7 +29,7 @@ class PokemonService: PokemonServiceProtocol {
     
     func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError> {
         let promise = Promise<[Pokemon], PokemonServiceError>()
-        let url = "\(HelperStrings.baseUrl)/api/pokemon/?offset=\(offset)&&limit=\(limit)"
+        let url = "\(Constants.baseUrl)/api/pokemon/?offset=\(offset)&&limit=\(limit)"
         
         networking?.request(url: url)
             .onSuccess(callback: { response in
@@ -59,7 +59,7 @@ class PokemonService: PokemonServiceProtocol {
     
     func fetchPokemon(_ id: Int) -> Future<PokemonDetail, PokemonServiceError> {
         let promise = Promise<PokemonDetail, PokemonServiceError>()
-        let url = "\(HelperStrings.baseUrl)/api/pokemon/\(id)"
+        let url = "\(Constants.baseUrl)/api/pokemon/\(id)"
         networking?.request(url: url)
             .onSuccess(callback: { response in
                 if let jsonData = response.data {
