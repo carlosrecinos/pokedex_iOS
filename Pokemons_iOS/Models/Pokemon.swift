@@ -36,6 +36,18 @@ struct PokemonDetail: Decodable {
     var stats: [PokemonStats]
     var sprites: Sprites?
     var measureUnits: MeasureUnits?
+    var abilities: [Abilities]
+}
+
+struct Abilities: Decodable {
+    var ability: Ability
+    var is_hidden: Bool
+    var slot: Int
+}
+
+struct Ability: Decodable {
+    var name: String
+    var url: String
 }
 
 struct Types: Decodable {

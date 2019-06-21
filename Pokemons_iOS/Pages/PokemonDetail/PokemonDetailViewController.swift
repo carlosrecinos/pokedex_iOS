@@ -17,7 +17,11 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
     @IBOutlet var nameLabel: UILabel?
     @IBOutlet var contentScrollView: UIScrollView?
     @IBOutlet var typesStackView: UIStackView?
+    @IBOutlet var typesContainer: UIView?
     @IBOutlet var statContainer: UIView?
+    
+    @IBOutlet var abilitiesContainer: UIView?
+    @IBOutlet var abilitiesLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,16 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
         self.navigationItem.leftBarButtonItem?.title = nil
         self.navigationItem.backBarButtonItem?.title = nil
         
+        abilitiesContainer?.translatesAutoresizingMaskIntoConstraints = false
+        
+        typesContainer?.layer.cornerRadius = 10
+        typesContainer?.clipsToBounds = true
+        
+        abilitiesContainer?.layer.cornerRadius = 10
+        abilitiesContainer?.clipsToBounds = true
+        
+        statContainer?.layer.cornerRadius = 10
+        statContainer?.clipsToBounds = true
     }
     
     func loadPokemonInfo() {
@@ -55,6 +69,7 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
         loadSprites()
         loadTypes()
         loadStats()
+        loadAbilities()
     }
     
     func loadStats() {
@@ -79,6 +94,11 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
                 typesStackView?.addArrangedSubview(typeImageView)
             }
         }
+    }
+    
+    func loadAbilities() {
+        let abilitiesText = selectedPokemon?.detail?.abilities.map({"\($0.ability.name)"}).joined(separator: "\n")
+        abilitiesLabel?.text = abilitiesText
     }
     
     func createTypeImageView(_ type: String) -> UIImageView {

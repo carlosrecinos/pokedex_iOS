@@ -35,7 +35,7 @@
                         <size key="shadowOffset" width="2" height="2"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLq-V7-1gS">
-                        <rect key="frame" x="147" y="24" width="35" height="22"/>
+                        <rect key="frame" x="128" y="24" width="35" height="22"/>
                         <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="14"/>
                         <color key="textColor" red="1" green="0.79607843140000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                         <size key="shadowOffset" width="2" height="2"/>
                     </label>
                     <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="d3W-Zx-5WK" customClass="StatsPokemonSlider" customModule="Pokemons_iOS" customModuleProvider="target">
-                        <rect key="frame" x="188" y="20" width="208" height="31"/>
+                        <rect key="frame" x="171" y="20" width="225" height="31"/>
                         <color key="thumbTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </slider>
                 </subviews>
@@ -54,8 +54,8 @@
                     <constraint firstItem="d3W-Zx-5WK" firstAttribute="centerY" secondItem="6r8-Qc-j9c" secondAttribute="centerY" id="KjO-uJ-f29"/>
                     <constraint firstAttribute="trailing" secondItem="d3W-Zx-5WK" secondAttribute="trailing" constant="20" id="f59-C8-tAq"/>
                     <constraint firstItem="b2b-o3-XRA" firstAttribute="leading" secondItem="6r8-Qc-j9c" secondAttribute="leading" constant="8" id="nIF-bC-meG"/>
-                    <constraint firstItem="SLq-V7-1gS" firstAttribute="leading" secondItem="b2b-o3-XRA" secondAttribute="trailing" constant="39" id="qqm-Ig-408"/>
-                    <constraint firstItem="d3W-Zx-5WK" firstAttribute="leading" secondItem="SLq-V7-1gS" secondAttribute="trailing" constant="8" symbolic="YES" id="tHx-vg-S8W"/>
+                    <constraint firstItem="SLq-V7-1gS" firstAttribute="leading" secondItem="b2b-o3-XRA" secondAttribute="trailing" constant="20" id="qqm-Ig-408"/>
+                    <constraint firstItem="d3W-Zx-5WK" firstAttribute="leading" secondItem="SLq-V7-1gS" secondAttribute="trailing" constant="10" id="tHx-vg-S8W"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
