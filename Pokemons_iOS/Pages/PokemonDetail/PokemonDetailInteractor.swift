@@ -15,10 +15,8 @@ class PokemonDetailInteractor: PokemonDetailInteractorProtocol {
     }
     
     func fetchPokemonDetail(_ id: Int) {
-        print("ready to fetch baby")
         pokemonService?.fetchPokemon(id)
         .onSuccess(callback: { detail in
-            print("success fetch detail wuuuu")
             self.pokemonDetailPresenter?.loadDetail(detail)
         })
         .onFailure(callback: { error in

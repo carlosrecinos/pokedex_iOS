@@ -1,6 +1,6 @@
 import UIKit
 
-class SlideViewController: UIView {
+class SlideView: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet var imageView: UIImageView!

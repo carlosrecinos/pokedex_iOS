@@ -22,7 +22,6 @@ class PokemonListInteractor: PokemonListInteractorProtocol {
     }
     
     func fetchPokemons(offset: Int, limit: Int) {
-        
         pokemonsService?.fetchPokemons(offset: offset, limit: limit)
             .onSuccess(callback: { pokemons in
                 self.pokemonListPresenter?.updatePokemonsList(pokemons: pokemons)

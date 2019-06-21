@@ -80,6 +80,20 @@ extension UIImageView {
     }
 }
 
+extension UIImage {
+    func resizeImage(newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage ?? self
+    }
+}
+
 extension UIColor {
 
     convenience init(red: Int, green: Int, blue: Int) {
@@ -95,7 +109,20 @@ extension UIColor {
     
     static let pokeBlue = UIColor(netHex: 0x1D2C5E)
     static let pokeYellow = UIColor(netHex: 0xFFCB06)
+    static let pokeYellowDarker = UIColor(netHex: 0xb99200)
     static let pokeRed = UIColor(netHex: 0xC02D35)
     static let pokeRedDarker = UIColor(netHex: 0x9B2027)
+    static let pokeRedAccentDarker = UIColor(netHex: 0x5c1b13)
     
+}
+
+
+protocol  ReusableCell {
+    static var cellIdentifier: String { get }
+    static var nib: UINib? { get }
+}
+
+extension ReusableCell {
+    static var cellIdentifier: String { return String(describing: self) }
+    static var nib: UINib? { return UINib(nibName: self.cellIdentifier, bundle: nil) }
 }

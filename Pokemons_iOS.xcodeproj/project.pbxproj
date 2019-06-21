@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2A384890335B438249BBE94A /* Pods_Pokemons_iOS_Pokemons_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7888430D0624F2A1747AA0 /* Pods_Pokemons_iOS_Pokemons_iOS_Tests.framework */; };
+		723B229922BC1BC6003327E4 /* StatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723B229822BC1BC6003327E4 /* StatCell.swift */; };
+		723B229B22BC1D29003327E4 /* StatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 723B229A22BC1D29003327E4 /* StatCell.xib */; };
+		723B229F22BC4094003327E4 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723B229E22BC4094003327E4 /* StatsViewController.swift */; };
+		7258983322BD5E050092B436 /* StatsPokemonSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7258983222BD5E050092B436 /* StatsPokemonSlider.swift */; };
 		725F650822AAC0B100A72B49 /* NetworkingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725F650722AAC0B100A72B49 /* NetworkingProtocols.swift */; };
 		725F650A22AAC45F00A72B49 /* AlamoFireNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725F650922AAC45F00A72B49 /* AlamoFireNetworking.swift */; };
 		725F650E22AAC7A400A72B49 /* PokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725F650D22AAC7A400A72B49 /* PokemonService.swift */; };
@@ -32,7 +36,7 @@
 		72801ED422B4B3FD00998DA1 /* PokemonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72801ED322B4B3FD00998DA1 /* PokemonDetailViewController.swift */; };
 		72BA40AB22B437EB008DF361 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72BA40AA22B437EB008DF361 /* Root.storyboard */; };
 		72D5871122B83DA9004934AD /* SpritesCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5871022B83DA9004934AD /* SpritesCarouselViewController.swift */; };
-		72D5871322B83E21004934AD /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5871222B83E21004934AD /* SlideViewController.swift */; };
+		72D5871322B83E21004934AD /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5871222B83E21004934AD /* SlideView.swift */; };
 		72D5871522B83E40004934AD /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5871422B83E40004934AD /* Slide.xib */; };
 		72D5871922B8A418004934AD /* PokemonDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5871822B8A418004934AD /* PokemonDetailPresenter.swift */; };
 		72D5871B22B8A614004934AD /* PokemonDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5871A22B8A614004934AD /* PokemonDetailInteractor.swift */; };
@@ -66,6 +70,10 @@
 /* Begin PBXFileReference section */
 		06292B04EF6FDEB7B9E53645 /* Pods-Pokemons_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pokemons_iOS.release.xcconfig"; path = "Target Support Files/Pods-Pokemons_iOS/Pods-Pokemons_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		6A7888430D0624F2A1747AA0 /* Pods_Pokemons_iOS_Pokemons_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pokemons_iOS_Pokemons_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		723B229822BC1BC6003327E4 /* StatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCell.swift; sourceTree = "<group>"; };
+		723B229A22BC1D29003327E4 /* StatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatCell.xib; sourceTree = "<group>"; };
+		723B229E22BC4094003327E4 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		7258983222BD5E050092B436 /* StatsPokemonSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPokemonSlider.swift; sourceTree = "<group>"; };
 		725F650722AAC0B100A72B49 /* NetworkingProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingProtocols.swift; sourceTree = "<group>"; };
 		725F650922AAC45F00A72B49 /* AlamoFireNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamoFireNetworking.swift; sourceTree = "<group>"; };
 		725F650D22AAC7A400A72B49 /* PokemonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonService.swift; sourceTree = "<group>"; };
@@ -90,7 +98,7 @@
 		72801ED322B4B3FD00998DA1 /* PokemonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewController.swift; sourceTree = "<group>"; };
 		72BA40AA22B437EB008DF361 /* Root.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		72D5871022B83DA9004934AD /* SpritesCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesCarouselViewController.swift; sourceTree = "<group>"; };
-		72D5871222B83E21004934AD /* SlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
+		72D5871222B83E21004934AD /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		72D5871422B83E40004934AD /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
 		72D5871822B8A418004934AD /* PokemonDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailPresenter.swift; sourceTree = "<group>"; };
 		72D5871A22B8A614004934AD /* PokemonDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailInteractor.swift; sourceTree = "<group>"; };
@@ -158,6 +166,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		723B229022BC0BF7003327E4 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				723B229822BC1BC6003327E4 /* StatCell.swift */,
+				723B229A22BC1D29003327E4 /* StatCell.xib */,
+				723B229E22BC4094003327E4 /* StatsViewController.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		725F650622AAC09500A72B49 /* HttpNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +210,7 @@
 				725F651622AACEEF00A72B49 /* Extensions.swift */,
 				72E5B24822B36A78000017BE /* KeychainManager.swift */,
 				72D5871C22B8C042004934AD /* Constants.swift */,
+				7258983222BD5E050092B436 /* StatsPokemonSlider.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -253,6 +272,7 @@
 		72801ED022B4B39000998DA1 /* PokemonDetail */ = {
 			isa = PBXGroup;
 			children = (
+				723B229022BC0BF7003327E4 /* Stats */,
 				72D5871622B83E66004934AD /* Carousel */,
 				72801ED122B4B3A600998DA1 /* PokemonDetail.storyboard */,
 				72801ED322B4B3FD00998DA1 /* PokemonDetailViewController.swift */,
@@ -274,7 +294,7 @@
 		72D5871722B84663004934AD /* Slide */ = {
 			isa = PBXGroup;
 			children = (
-				72D5871222B83E21004934AD /* SlideViewController.swift */,
+				72D5871222B83E21004934AD /* SlideView.swift */,
 				72D5871422B83E40004934AD /* Slide.xib */,
 			);
 			path = Slide;
@@ -466,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72DF052822A995E100680EA8 /* LaunchScreen.storyboard in Resources */,
+				723B229B22BC1D29003327E4 /* StatCell.xib in Resources */,
 				72D723CB22B45A6C00DA63A0 /* LoadingFooter.xib in Resources */,
 				72DF052522A995E100680EA8 /* Assets.xcassets in Resources */,
 				725F653A22AB243F00A72B49 /* Login.storyboard in Resources */,
@@ -579,14 +600,16 @@
 				725F653822AB241900A72B49 /* LoginViewController.swift in Sources */,
 				72E5B25222B43139000017BE /* MainViewController.swift in Sources */,
 				725F650E22AAC7A400A72B49 /* PokemonService.swift in Sources */,
+				723B229F22BC4094003327E4 /* StatsViewController.swift in Sources */,
 				7261832222ADD0D3006221CC /* LoginPresenter.swift in Sources */,
 				725F650A22AAC45F00A72B49 /* AlamoFireNetworking.swift in Sources */,
 				725F651722AACEEF00A72B49 /* Extensions.swift in Sources */,
 				7261832A22ADDCB2006221CC /* PokemonListPresenter.swift in Sources */,
 				72DF051E22A995E000680EA8 /* AppDelegate.swift in Sources */,
 				72D723CA22B45A6C00DA63A0 /* LoadingFooter.swift in Sources */,
-				72D5871322B83E21004934AD /* SlideViewController.swift in Sources */,
+				72D5871322B83E21004934AD /* SlideView.swift in Sources */,
 				7261832822ADD381006221CC /* User.swift in Sources */,
+				7258983322BD5E050092B436 /* StatsPokemonSlider.swift in Sources */,
 				72D5871D22B8C042004934AD /* Constants.swift in Sources */,
 				7261832422ADD181006221CC /* LoginInteractor.swift in Sources */,
 				7261832C22AE2832006221CC /* PokemonListInteractor.swift in Sources */,
@@ -602,6 +625,7 @@
 				72E5B24922B36A78000017BE /* KeychainManager.swift in Sources */,
 				725F652922AB199600A72B49 /* PokemonListViewController.swift in Sources */,
 				725F652E22AB1C2300A72B49 /* SettingsViewController.swift in Sources */,
+				723B229922BC1BC6003327E4 /* StatCell.swift in Sources */,
 				725F653C22AB2B9A00A72B49 /* MainAssembly.swift in Sources */,
 				7261832622ADD330006221CC /* AuthenticationService.swift in Sources */,
 			);

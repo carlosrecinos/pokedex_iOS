@@ -9,12 +9,15 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
 
     var selectedPokemon: Pokemon?
     var spritesSegueIdentifier = "SpritesViewSegue"
+    var statsSegueIdentifer = "StatsSegueIdentifier"
     var spritesCarouselViewController: SpritesCarouselViewController!
+    var statsViewController: StatsViewController!
     var pokemonDetailPresenter: PokemonDetailPresenterProtocol?
     
     @IBOutlet var nameLabel: UILabel?
     @IBOutlet var contentScrollView: UIScrollView?
     @IBOutlet var typesStackView: UIStackView?
+    @IBOutlet var statContainer: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +57,13 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
         loadStats()
     }
     
+    func loadStats() {
+        if let stats = selectedPokemon?.detail?.stats {
+            statsViewController?.loadStats(stats)
+        }
+        
+    }
+    
     func loadSprites() {
         let sprites = selectedPokemon?.detail?.sprites?.getSprites()
         if let sprites = sprites {
@@ -67,7 +77,6 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
                 let typeImageView = createTypeImageView(type.type.name)
                 typeImageView.translatesAutoresizingMaskIntoConstraints = false
                 typesStackView?.addArrangedSubview(typeImageView)
-                
             }
         }
     }
@@ -78,19 +87,19 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
         
         image.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
-        let imageUrl = "\(Constants.baseUrl)/images/\(type).png"
+        let imageUrl = "\(Constants.imagesBaseUrl)/\(type).png"
         image.imageFromURL(urlString: imageUrl, withSize: nil)
         
         return image
     }
     
-    func loadStats() {
-        
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SpritesCarouselViewController, segue.identifier == spritesSegueIdentifier {
             self.spritesCarouselViewController = destination
+        } else if let destination = segue.destination as? StatsViewController, segue.identifier == statsSegueIdentifer {
+            self.statsViewController = destination
+        
+            self.statsViewController.view.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 }

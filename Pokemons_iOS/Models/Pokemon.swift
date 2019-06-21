@@ -33,7 +33,7 @@ struct Pokemon: Decodable {
 struct PokemonDetail: Decodable {
     var types: [Types]?
     var height: Int?
-    var stats: [PokemonStats]?
+    var stats: [PokemonStats]
     var sprites: Sprites?
     var measureUnits: MeasureUnits?
 }
@@ -68,15 +68,14 @@ struct Sprites: Decodable, Loopable {
         } catch let error {
             print("Error getting sprites", error)
         }
-        print("dics", dictionary)
         return dictionary
     }
 }
 
 struct PokemonStats: Decodable {
-    var base_stat: Int?
-    var effort: Int?
-    var stat: Stat?
+    var base_stat: Int
+    var effort: Int
+    var stat: Stat
 }
 
 struct Stat: Decodable {

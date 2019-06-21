@@ -11,7 +11,7 @@ class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var spritesPageControl: UIPageControl!
     
     var sprites: [String]?
-    var slides: [SlideViewController]?
+    var slides: [SlideView]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +26,11 @@ class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
         view.bringSubviewToFront(spritesPageControl)
     }
     
-    func createSlides(_ sprites: [String: String]) -> [SlideViewController] {
-        var items: [SlideViewController] = []
+    func createSlides(_ sprites: [String: String]) -> [SlideView] {
+        var items: [SlideView] = []
         
         for (key, sprite) in sprites {
-            let scrollViewItem = SlideViewController()
+            let scrollViewItem = SlideView()
             scrollViewItem.nameLabel.text = key
             scrollViewItem.nameLabel.textColor = UIColor.pokeBlue
             scrollViewItem.imageView.imageFromURL(urlString: sprite, withSize: nil)
