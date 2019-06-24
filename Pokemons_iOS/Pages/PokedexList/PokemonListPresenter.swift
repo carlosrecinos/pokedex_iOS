@@ -10,9 +10,11 @@ import Foundation
 
 protocol PokemonListPresenterProtocol {
     var pokemonListViewController: PokemonListViewControllerProtocol? { get set }
-    func updatePokemonsList(pokemons: [Pokemon])
+    func updateAllPokemonsList(pokemons: [Pokemon])
+    func updateOwnedPokemonsList(pokemons: [Pokemon])
     func showError(error: PokemonServiceError)
-    func fetchPokemons()
+    func fetchPokemons(type: PokemonsListTypes)
+    func updateOffsetCounter()
 }
 
 class PokemonListPresenter: PokemonListPresenterProtocol {
@@ -22,22 +24,38 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     var offset = 0
     var limit = 29
     
+    var allPokemons: [Pokemon] = []
+    
     func inject(interactor: PokemonListInteractorProtocol) {
         pokemonListInteractor = interactor
     }
     
-    func fetchPokemons() {
-        pokemonListInteractor?.fetchPokemons(offset: offset, limit: limit)
+    func fetchPokemons(type: PokemonsListTypes) {
+        switch type {
+        case .allPokemons:
+            print("to fetch all")
+            pokemonListInteractor?.fetchPokemons(offset: offset, limit: limit)
+        case .ownedPokemons:
+            print("to fetch owned")
+            var poks = [
+                Pokemon(id: 1, name: "ASD", url: "https://pokeapi.co/api/v2/pokemon/1/", detail: nil),
+                        Pokemon(id: 2, name: "ASD2", url: "https://pokeapi.co/api/v2/pokemon/2/", detail: nil)
+            ]
+            poks = [Pokemon(id: 1, name: "Chicorita", url: "https://pokeapi.co/api/v2/pokemon/30/", detail: nil)]
+            updateOwnedPokemonsList(pokemons: poks)
+        }
     }
     
-    func updatePokemonsList(pokemons: [Pokemon]) {
-        updateOffsetCounter()
-        pokemonListViewController?.updatePokemonsList(pokemons: pokemons)
+    func updateAllPokemonsList(pokemons: [Pokemon]) {
+        pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .allPokemons)
+    }
+    
+    func updateOwnedPokemonsList(pokemons: [Pokemon]) {
+        pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .ownedPokemons)
     }
     
     func updateOffsetCounter() {
         offset += limit + 2
-        
     }
     
     func showError(error: PokemonServiceError) {

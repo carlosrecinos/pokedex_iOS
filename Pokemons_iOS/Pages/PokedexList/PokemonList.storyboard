@@ -9,11 +9,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="pokemonSolidFont.ttf">
-            <string>PokemonSolidNormal</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--List-->
         <scene sceneID="mTO-ZU-23S">
@@ -32,77 +27,9 @@
                                     <size key="footerReferenceSize" width="50" height="1"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonListCell" id="mdK-Sy-eOI">
-                                        <rect key="frame" x="22.5" y="0.0" width="369" height="273"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="369" height="273"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8k-IK-r2Y">
-                                                    <rect key="frame" x="0.0" y="0.0" width="369" height="273"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vgt-Xk-3Ge">
-                                                            <rect key="frame" x="0.0" y="0.0" width="369" height="273"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="AuG-1T-PL8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="369" height="137"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="137" id="Z9x-Yj-Dd1"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <view contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QdE-3e-gVR">
-                                                                    <rect key="frame" x="0.0" y="137" width="369" height="136"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQH-pm-QI9">
-                                                                            <rect key="frame" x="12" y="8" width="39.5" height="24"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="24" id="XzO-JZ-VHe"/>
-                                                                            </constraints>
-                                                                            <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="16"/>
-                                                                            <color key="textColor" red="1" green="0.79607843137254897" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                            <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <size key="shadowOffset" width="2" height="1"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="pQH-pm-QI9" firstAttribute="top" secondItem="QdE-3e-gVR" secondAttribute="topMargin" id="1U7-9f-saP"/>
-                                                                        <constraint firstItem="pQH-pm-QI9" firstAttribute="top" secondItem="QdE-3e-gVR" secondAttribute="top" constant="8" id="Ywr-cf-tAS"/>
-                                                                        <constraint firstItem="pQH-pm-QI9" firstAttribute="leading" relation="lessThanOrEqual" secondItem="QdE-3e-gVR" secondAttribute="leading" priority="750" constant="12" id="ZEi-7s-cfg"/>
-                                                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="pQH-pm-QI9" secondAttribute="trailing" priority="250" constant="12" id="nQH-lN-xXT"/>
-                                                                    </constraints>
-                                                                </view>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="AuG-1T-PL8" secondAttribute="trailing" id="UwE-tZ-i5y"/>
-                                                                <constraint firstItem="AuG-1T-PL8" firstAttribute="leading" secondItem="vgt-Xk-3Ge" secondAttribute="leading" id="WLQ-Ub-xe1"/>
-                                                                <constraint firstItem="AuG-1T-PL8" firstAttribute="top" secondItem="vgt-Xk-3Ge" secondAttribute="top" id="Xla-Fk-wQA"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="vgt-Xk-3Ge" firstAttribute="top" secondItem="H8k-IK-r2Y" secondAttribute="top" id="27z-mn-O2w"/>
-                                                        <constraint firstItem="vgt-Xk-3Ge" firstAttribute="leading" secondItem="H8k-IK-r2Y" secondAttribute="leading" id="6mW-EV-ibA"/>
-                                                        <constraint firstAttribute="trailing" secondItem="vgt-Xk-3Ge" secondAttribute="trailing" id="nNV-Ey-Otu"/>
-                                                        <constraint firstAttribute="bottom" secondItem="vgt-Xk-3Ge" secondAttribute="bottom" id="uud-V9-I62"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="H8k-IK-r2Y" firstAttribute="top" secondItem="mdK-Sy-eOI" secondAttribute="top" id="4Eu-ZF-vF1"/>
-                                            <constraint firstAttribute="bottom" secondItem="H8k-IK-r2Y" secondAttribute="bottom" id="S03-IF-s9t"/>
-                                            <constraint firstAttribute="trailing" secondItem="H8k-IK-r2Y" secondAttribute="trailing" id="l06-78-gEc"/>
-                                            <constraint firstItem="H8k-IK-r2Y" firstAttribute="leading" secondItem="mdK-Sy-eOI" secondAttribute="leading" id="mJa-2E-rnv"/>
-                                        </constraints>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rDU-wL-yZb">
-                                    <rect key="frame" x="0.0" y="273" width="414" height="1"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>

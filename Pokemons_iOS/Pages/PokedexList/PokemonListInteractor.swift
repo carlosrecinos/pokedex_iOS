@@ -24,7 +24,8 @@ class PokemonListInteractor: PokemonListInteractorProtocol {
     func fetchPokemons(offset: Int, limit: Int) {
         pokemonsService?.fetchPokemons(offset: offset, limit: limit)
             .onSuccess(callback: { pokemons in
-                self.pokemonListPresenter?.updatePokemonsList(pokemons: pokemons)
+                self.pokemonListPresenter?.updateOffsetCounter()
+                self.pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
             })
         .onFailure(callback: { error in
             print(error)
