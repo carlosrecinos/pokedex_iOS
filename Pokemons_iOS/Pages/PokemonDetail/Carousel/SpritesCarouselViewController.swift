@@ -48,7 +48,7 @@ class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
         
         for (index, item) in slides?.enumerated() ?? [].enumerated() {
             item.frame = CGRect(x: view.frame.width * CGFloat(index), y: 0, width: view.frame.width, height: view.frame.height)
-            item.imageView.backgroundColor = UIColor.pokeYellow
+//            item.imageView.backgroundColor = UIColor.pokeYellow
 
             spritesScrollView.addSubview(item)
             

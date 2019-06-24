@@ -28,24 +28,35 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     }
     
     func setInitConfig() {
-        // TODO
-//        self.delega
-        let tabBarItem = UITabBarItem(title: "Pokemons", image: UIImage(named: "pokeball_icon"), tag: 0)
+        configureNavigationBar()
+        configureTabbar()
+        configurePokemonsCollectionView()
         
-        self.navigationItem.title = "Pokemons"
+    }
+    
+    func configureNavigationBar() {
+        self.navigationItem.titleView = buildSegmentedControlTitle()
         self.navigationItem.largeTitleDisplayMode = .always
-        self.tabBarItem = tabBarItem
         
-        self.tabBarController?.tabBar.tintColor = UIColor.pokeRed
-        self.tabBarController?.tabBar.isTranslucent = false
+        
         
         self.navigationController?.navigationBar.barTintColor = UIColor.pokeRed
         self.navigationController?.navigationBar.tintColor = UIColor.pokeYellow
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_icon"), style: .done, target: self, action: nil)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
-
+    }
+    
+    func configureTabbar() {
+        let tabBarItem = UITabBarItem(title: "Pokemons", image: UIImage(named: "pokeball_icon"), tag: 0)
         
+        self.tabBarItem = tabBarItem
+        self.tabBarController?.tabBar.tintColor = UIColor.pokeRed
+        self.tabBarController?.tabBar.isTranslucent = false
+        
+    }
+    
+    func configurePokemonsCollectionView() {
         pokemonListCollectionView.dataSource = self
         pokemonListCollectionView.delegate = self
         pokemonListCollectionView.register(UINib(nibName: "LoadingFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
@@ -66,7 +77,23 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         layout.itemSize = CGSize(width: width, height: width * 1.2)
         footerSize = CGSize(width: view.frame.size.width, height: 55)
         layout.footerReferenceSize = footerSize!
+    }
+    
+    func buildSegmentedControlTitle() -> UISegmentedControl {
+        let items = ["All", "Owned"]
+        let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.frame = CGRect(x: 0, y: 0, width: 150, height: 35)
+        segmentedControl.addTarget(self, action: #selector(onSegmentedPressedAction(_:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 1
         
+        let font = UIFont(name: "Pokemon Solid", size: 16)!
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
+        return segmentedControl
+    }
+    
+    @objc func onSegmentedPressedAction(_ segmentedControl: UISegmentedControl) {
+        print("something changed")
     }
     
     func requestNewPokemonsList() {

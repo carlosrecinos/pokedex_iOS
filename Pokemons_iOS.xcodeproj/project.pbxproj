@@ -223,12 +223,12 @@
 				725F653622AB240C00A72B49 /* Login */,
 				725F653122AB1FA600A72B49 /* Profile */,
 				725F652A22AB1B7200A72B49 /* Settings */,
-				725F651B22AB031100A72B49 /* PokemonList */,
+				725F651B22AB031100A72B49 /* PokedexList */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
 		};
-		725F651B22AB031100A72B49 /* PokemonList */ = {
+		725F651B22AB031100A72B49 /* PokedexList */ = {
 			isa = PBXGroup;
 			children = (
 				72E5B23F22B2B06C000017BE /* LoadingFooter */,
@@ -237,7 +237,7 @@
 				7261832922ADDCB2006221CC /* PokemonListPresenter.swift */,
 				7261832B22AE2832006221CC /* PokemonListInteractor.swift */,
 			);
-			path = PokemonList;
+			path = PokedexList;
 			sourceTree = "<group>";
 		};
 		725F652A22AB1B7200A72B49 /* Settings */ = {
