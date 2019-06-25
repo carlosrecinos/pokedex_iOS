@@ -11,6 +11,13 @@ import Swinject
 
 class MainAssembly: Assembly {
     func assemble(container: Container) {
+        // CoreData
+        
+        container.register(CoreDataManager.self, factory: { _ in
+            return CoreDataManager()
+        }).inObjectScope(.container)
+        
+        
         // Networking
         container.register(HttpNetworking.self) { _ in
             return AlamofireNetworking()
@@ -29,7 +36,8 @@ class MainAssembly: Assembly {
         container.register(PokemonServiceProtocol.self) { resolver in
             let pokemonService = PokemonService()
             let networking = resolver.resolve(HttpNetworking.self)!
-            pokemonService.inject(networking: networking)
+            let coreDataManager = resolver.resolve(CoreDataManager.self)!
+            pokemonService.inject(networking: networking, coreDataManager: coreDataManager)
             return pokemonService
         }
         
@@ -38,6 +46,7 @@ class MainAssembly: Assembly {
         registerPokemonListPage(to: container)
         registerPokemonDetailPage(to: container)
         registerRootPage(to: container)
+        registerProfilePage(to: container)
     }
     
     func registerRootPage(to container: Container) {
@@ -130,6 +139,14 @@ class MainAssembly: Assembly {
                 
                 pokemonDetailInteractor.pokemonDetailPresenter = resolver.resolve(PokemonDetailPresenterProtocol.self)
         }
+    }
+    
+    func registerProfilePage(to container: Container) {
+        container.storyboardInitCompleted(ProfileViewController.self) {(resolver, viewController) in
+            let coreDataManager = resolver.resolve(CoreDataManager.self)!
+            viewController.inject(coreDataManager: coreDataManager)
+        }
+        
     }
     
 }

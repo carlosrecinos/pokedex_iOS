@@ -33,19 +33,39 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PgK-QZ-hRp" userLabel="OwnedPokemons">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qYR-Qb-CPt">
+                                    <size key="itemSize" width="369" height="273"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="1"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="E0T-TB-3vk">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="PgK-QZ-hRp" firstAttribute="trailing" secondItem="1Dh-Nu-MlC" secondAttribute="trailing" id="2Rv-8J-Ugz"/>
                             <constraint firstAttribute="bottom" secondItem="uVX-SI-uWE" secondAttribute="bottom" id="7Gh-IZ-mhy"/>
                             <constraint firstItem="uVX-SI-uWE" firstAttribute="leading" secondItem="1Dh-Nu-MlC" secondAttribute="leading" id="9kn-at-TmF"/>
                             <constraint firstItem="uVX-SI-uWE" firstAttribute="top" secondItem="9dk-LX-YQz" secondAttribute="top" id="CF0-K9-IZc"/>
+                            <constraint firstAttribute="bottom" secondItem="PgK-QZ-hRp" secondAttribute="bottom" id="KIV-uC-Yca"/>
+                            <constraint firstItem="PgK-QZ-hRp" firstAttribute="leading" secondItem="1Dh-Nu-MlC" secondAttribute="leading" id="M8E-gG-Un2"/>
                             <constraint firstItem="1Dh-Nu-MlC" firstAttribute="trailing" secondItem="uVX-SI-uWE" secondAttribute="trailing" id="VeT-zC-21I"/>
+                            <constraint firstItem="PgK-QZ-hRp" firstAttribute="top" secondItem="1Dh-Nu-MlC" secondAttribute="top" id="mQP-bc-H96"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Dh-Nu-MlC"/>
                     </view>
                     <navigationItem key="navigationItem" id="tHJ-9m-3jX"/>
                     <connections>
-                        <outlet property="pokemonListCollectionView" destination="uVX-SI-uWE" id="Vgf-0P-fIL"/>
+                        <outlet property="allPokemonsCollectionView" destination="uVX-SI-uWE" id="mbb-Y6-suM"/>
+                        <outlet property="ownedPokemonsCollectionView" destination="PgK-QZ-hRp" id="vjU-ZR-tlP"/>
                         <segue destination="nkd-D2-tNP" kind="show" identifier="DetailSegue" id="BzT-FK-jxZ"/>
                     </connections>
                 </viewController>

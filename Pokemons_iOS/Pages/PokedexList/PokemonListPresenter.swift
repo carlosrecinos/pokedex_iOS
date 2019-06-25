@@ -14,15 +14,13 @@ protocol PokemonListPresenterProtocol {
     func updateOwnedPokemonsList(pokemons: [Pokemon])
     func showError(error: PokemonServiceError)
     func fetchPokemons(type: PokemonsListTypes)
-    func updateOffsetCounter()
+    func loadLocalPokemons()
 }
 
 class PokemonListPresenter: PokemonListPresenterProtocol {
     
     var pokemonListViewController: PokemonListViewControllerProtocol?
     var pokemonListInteractor: PokemonListInteractorProtocol?
-    var offset = 0
-    var limit = 29
     
     var allPokemons: [Pokemon] = []
     
@@ -30,18 +28,21 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
         pokemonListInteractor = interactor
     }
     
+    func loadLocalPokemons() {
+        pokemonListInteractor?.loadLocalPokemons()
+    }
+    
     func fetchPokemons(type: PokemonsListTypes) {
         switch type {
         case .allPokemons:
             print("to fetch all")
-            pokemonListInteractor?.fetchPokemons(offset: offset, limit: limit)
+            pokemonListInteractor?.fetchPokemons()
         case .ownedPokemons:
             print("to fetch owned")
             var poks = [
-                Pokemon(id: 1, name: "ASD", url: "https://pokeapi.co/api/v2/pokemon/1/", detail: nil),
-                        Pokemon(id: 2, name: "ASD2", url: "https://pokeapi.co/api/v2/pokemon/2/", detail: nil)
+                Pokemon(id: 1, name: "ASD", url: "https://pokeapi.co/api/v2/pokemon/1/"),
+                        Pokemon(id: 2, name: "ASD2", url: "https://pokeapi.co/api/v2/pokemon/2/")
             ]
-            poks = [Pokemon(id: 1, name: "Chicorita", url: "https://pokeapi.co/api/v2/pokemon/30/", detail: nil)]
             updateOwnedPokemonsList(pokemons: poks)
         }
     }
@@ -52,10 +53,6 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     
     func updateOwnedPokemonsList(pokemons: [Pokemon]) {
         pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .ownedPokemons)
-    }
-    
-    func updateOffsetCounter() {
-        offset += limit + 2
     }
     
     func showError(error: PokemonServiceError) {

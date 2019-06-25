@@ -22,11 +22,31 @@ struct Pokemon: Decodable {
         return Int(id)
     }
     
+    func getPokemonId() -> Int16? {
+        let urlWithouLastSlash = url.dropLast()
+        let idIndex = url.index(after: urlWithouLastSlash.lastIndex(of: "/")!)
+        let range = idIndex..<urlWithouLastSlash.endIndex
+        let id = urlWithouLastSlash[range]
+        return Int16(id)
+    }
+    
     func getImageUrl() -> String {
         let baseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-        let pokemonId = getPokemonId()
-        let imageUrl = "\(baseUrl)\(pokemonId ?? 1).png"
+        let pokemonId: Int = getPokemonId()!
+        let imageUrl = "\(baseUrl)\(pokemonId).png"
         return imageUrl
+    }
+    
+    init(id: Int, name: String, url: String) {
+        self.id = id
+        self.name = name
+        self.url = url
+    }
+    
+    init(from model: PokemonModel) {
+        name = model.name!
+        url = model.url!
+        id = Int(model.id)
     }
 }
 

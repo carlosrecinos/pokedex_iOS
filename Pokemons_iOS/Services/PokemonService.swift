@@ -16,18 +16,71 @@ enum PokemonServiceError: Error {
 }
 
 protocol PokemonServiceProtocol {
-    func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError>
+    func fetchPokemons() -> Future<[Pokemon], PokemonServiceError>
     func fetchPokemon(_ id: Int) -> Future<PokemonDetail, PokemonServiceError>
+    func loadLocalPokemons() -> [Pokemon]
 }
 
 class PokemonService: PokemonServiceProtocol {
     var networking: HttpNetworking?
+    var coreDataManager: CoreDataManager?
     
-    func inject(networking: HttpNetworking) {
+    func inject(networking: HttpNetworking, coreDataManager: CoreDataManager) {
         self.networking = networking
+        self.coreDataManager = coreDataManager
     }
     
-    func fetchPokemons(offset: Int, limit: Int) -> Future<[Pokemon], PokemonServiceError> {
+    func getCoreDataPokemons() -> [Any]? {
+        let context = coreDataManager?.persistentContainer.viewContext
+        var pokemonsFromCoreData: [Any]? = []
+        do {
+            pokemonsFromCoreData = try context?.fetch(PokemonModel.fetchRequest())
+        } catch {
+            let error = error as NSError
+            fatalError("\(error)")
+        }
+        
+        return pokemonsFromCoreData
+    }
+    
+    func savePokemonsToCoreData(_ pokemons: [Pokemon]) {
+        let context = coreDataManager?.persistentContainer.viewContext
+        var currentPokemons = getCoreDataPokemons()
+        for pokemon in pokemons {
+            let pokemonModel = PokemonModel(entity: PokemonModel.entity(), insertInto: context)
+            pokemonModel.name = pokemon.name
+            pokemonModel.url = pokemon.url
+            pokemonModel.id = pokemon.getPokemonId()!
+            currentPokemons?.append(pokemonModel)
+        }
+        
+        coreDataManager?.saveContext()
+        
+    }
+    
+    func convertFromModelToStruct(_ pokemons: [Any]?) -> [Pokemon] {
+        var pokemonsStructs: [Pokemon] = []
+        if let pokemons = pokemons {
+            for pokemon in pokemons {
+                let castedPokemon = pokemon as! PokemonModel
+                pokemonsStructs.append(Pokemon(from: castedPokemon))
+            }
+        }
+        return pokemonsStructs
+    }
+    
+    func loadLocalPokemons() -> [Pokemon] {
+        let coreDataPokemons = getCoreDataPokemons()
+        let pokemons = convertFromModelToStruct(coreDataPokemons)
+        return pokemons
+    }
+    
+    func fetchPokemons() -> Future<[Pokemon], PokemonServiceError> {
+        
+        let pokemonsFromCoreData = getCoreDataPokemons()
+        let offset = pokemonsFromCoreData?.count ?? 0
+        let limit = 29
+        
         let promise = Promise<[Pokemon], PokemonServiceError>()
         let url = "\(Constants.baseUrl)/api/pokemon/?offset=\(offset)&&limit=\(limit)"
         
@@ -35,10 +88,10 @@ class PokemonService: PokemonServiceProtocol {
             .onSuccess(callback: { response in
                 if let jsonData = response.data {
                     do {
-                        
                         let pokemonsResponse = try JSONDecoder().decode(PokemonsApiResponse.self, from: jsonData)
                         let pokemons = pokemonsResponse.data?.results!
                         if let pokemons = pokemons {
+                            self.savePokemonsToCoreData(pokemons)
                             promise.success(pokemons)
                         } else {
                             promise.success([])
@@ -54,6 +107,7 @@ class PokemonService: PokemonServiceProtocol {
             .onFailure { error in
                 print("errorASASD")
         }
+        
         return promise.future
     }
     

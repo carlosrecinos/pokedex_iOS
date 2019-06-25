@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Pokemons_iOS/Data/Models/PokemonModel+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/carlosrecinos/Documents/GitHub/pokedex_iOS/Pokemons_iOS/Data/PokemonModel+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:Pokemons_iOS.xcodeproj">
    </FileRef>
    <FileRef

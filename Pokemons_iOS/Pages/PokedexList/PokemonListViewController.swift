@@ -13,14 +13,16 @@ enum PokemonsListTypes {
 class PokemonListViewController: UIViewController, PokemonListViewControllerProtocol {
     
     @IBOutlet weak var isLoggedVarLabel: UILabel!
-    @IBOutlet weak var pokemonListCollectionView: UICollectionView!
+    @IBOutlet weak var allPokemonsCollectionView: UICollectionView!
+    @IBOutlet weak var ownedPokemonsCollectionView: UICollectionView!
     weak var titleSegmentedControl: UISegmentedControl!
     
     var pokemonListPresenter: PokemonListPresenterProtocol?
     var ownedPokemons: [Pokemon] = []
     var allPokemons: [Pokemon] = []
     var isLoading = false
-    var footerView: PokemonListFooterActivityIndicator?
+    var allPokemonsFooter: PokemonListFooterActivityIndicator?
+    var ownedPokemonsFooter: PokemonListFooterActivityIndicator?
     var loadingFooterIdentifier = "PokemonListFooter"
     var footerSize: CGSize?
     
@@ -33,7 +35,7 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     override func viewDidLoad() {
         setInitConfig()
-        requestNewPokemonsList()
+        loadPokemonsData()
     }
     
     func setInitConfig() {
@@ -48,8 +50,6 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         self.navigationItem.titleView = buildSegmentedControlTitle()
         self.navigationItem.largeTitleDisplayMode = .always
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.pokeRed
-        self.navigationController?.navigationBar.tintColor = UIColor.pokeYellow
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_icon"), style: .done, target: self, action: nil)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
@@ -66,28 +66,54 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     func configurePokemonsCollectionView() {
         
-        pokemonListCollectionView.dataSource = self
-        pokemonListCollectionView.delegate = self
+        allPokemonsCollectionView.dataSource = self
+        allPokemonsCollectionView.delegate = self
         
-        pokemonListCollectionView.register(UINib(nibName: "LoadingFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
+        allPokemonsCollectionView.register(UINib(nibName: "LoadingFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
         
-        pokemonListCollectionView.register(PokemonCardCollectionViewCell.nib, forCellWithReuseIdentifier: PokemonCardCollectionViewCell.cellIdentifier)
+        allPokemonsCollectionView.register(PokemonCardCollectionViewCell.nib, forCellWithReuseIdentifier: PokemonCardCollectionViewCell.cellIdentifier)
+        
+        ownedPokemonsCollectionView.dataSource = self
+        ownedPokemonsCollectionView.delegate = self
+        
+        ownedPokemonsCollectionView.register(UINib(nibName: "LoadingFooter", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: loadingFooterIdentifier)
+        
+        ownedPokemonsCollectionView.register(PokemonCardCollectionViewCell.nib, forCellWithReuseIdentifier: PokemonCardCollectionViewCell.cellIdentifier)
         
         let spacing = CGFloat(10.0)
         let horizontalLayoutMargin = CGFloat(8.0)
         let width = (view.frame.size.width - spacing - CGFloat(horizontalLayoutMargin * 2)) / 2
-        let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let allPokemonsLayout = allPokemonsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        
+        let ownedPokemonslayout = ownedPokemonsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         
-        layout.sectionInset = UIEdgeInsets(
+        allPokemonsLayout.sectionInset = UIEdgeInsets(
             top: CGFloat(16),
             left: horizontalLayoutMargin,
             bottom: CGFloat(0),
             right: horizontalLayoutMargin)
         
-        layout.itemSize = CGSize(width: width, height: width * 1.2)
+        allPokemonsLayout.itemSize = CGSize(width: width, height: width * 1.2)
         footerSize = CGSize(width: view.frame.size.width, height: 55)
-        layout.footerReferenceSize = footerSize!
+        allPokemonsLayout.footerReferenceSize = footerSize!
+        
+        ownedPokemonslayout.sectionInset = allPokemonsLayout.sectionInset
+        ownedPokemonslayout.itemSize = allPokemonsLayout.itemSize
+        ownedPokemonslayout.footerReferenceSize = footerSize!
+        
+        showAllPokemonsCollectionView()
+        
+    }
+    
+    func showAllPokemonsCollectionView() {
+        allPokemonsCollectionView?.isHidden = false
+        ownedPokemonsCollectionView?.isHidden = true
+    }
+    
+    func showOwnedPokemonsCollectionView() {
+        allPokemonsCollectionView?.isHidden = true
+        ownedPokemonsCollectionView?.isHidden = false
     }
     
     func buildSegmentedControlTitle() -> UISegmentedControl {
@@ -105,34 +131,32 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     @objc func onSegmentedPressedAction(_ segmentedControl: UISegmentedControl) {
 
-        if(segmentedControl.selectedSegmentIndex == 1) {
-            lastIndexPathForAllPokemons = pokemonListCollectionView.indexPathsForVisibleItems
+        if segmentedControl.selectedSegmentIndex == 1 {
+            showOwnedPokemonsCollectionView()
             requestNewPokemonsList()
-            
         } else {
-            lastIndexPathForOwnedPokemons = pokemonListCollectionView.indexPathsForVisibleItems
-            pokemonListCollectionView.reloadData()
-            if let lastIndex = lastIndexPathForAllPokemons {
-//                pokemonListCollectionView.reloadItems(at: lastIndex)
-            }
+            showAllPokemonsCollectionView()
         }
         
+    }
+    
+    func loadPokemonsData() {
+        pokemonListPresenter?.loadLocalPokemons()
     }
     
     func requestNewPokemonsList() {
         isLoading = true
         switch titleSegmentedControl.selectedSegmentIndex {
         case 0:
-            print("requesting all")
             pokemonListPresenter?.fetchPokemons(type: .allPokemons)
+            showFooter(type: .allPokemons)
         case 1:
-            print("requesting owned")
             pokemonListPresenter?.fetchPokemons(type: .ownedPokemons)
+            showFooter(type: .ownedPokemons)
         default:
             print("Unhandled selection")
         }
         
-        showFooter()
     }
     
     func updatePokemonsList(pokemons: [Pokemon], type: PokemonsListTypes) {
@@ -141,58 +165,63 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         switch type {
         case .allPokemons:
             allPokemons += pokemons
+            allPokemonsCollectionView.reloadData()
+            removeFooter(type: .allPokemons)
         case .ownedPokemons:
             ownedPokemons += pokemons
-            if let lastIndex = lastIndexPathForOwnedPokemons {
-//                pokemonListCollectionView.reloadItems(at: lastIndex)
-            }
+            ownedPokemonsCollectionView.reloadData()
+            removeFooter(type: .ownedPokemons)
         }
         
-        pokemonListCollectionView.reloadData()
-        removeFooter()
+        
     }
 
-    func showFooter() {
+    func showFooter(type: PokemonsListTypes) {
         animateFooterActivityIndicator()
-        updateCollectionViewLayoutFooterSize(size: footerSize!)
+        updateCollectionViewLayoutFooterSize(size: footerSize!, type: type)
+        
     }
     
     func animateFooterActivityIndicator() {
-        if let activityIndicator = footerView?.viewWithTag(5) as! UIActivityIndicatorView? {
-            activityIndicator.startAnimating()
+        switch titleSegmentedControl.selectedSegmentIndex {
+        case 0:
+            if let activityIndicator = allPokemonsFooter?.viewWithTag(5) as! UIActivityIndicatorView? {
+                activityIndicator.startAnimating()
+            }
+        case 1:
+            if let activityIndicator = ownedPokemonsFooter?.viewWithTag(5) as! UIActivityIndicatorView? {
+                activityIndicator.startAnimating()
+            }
+        default:
+            print("Unhandled")
         }
     }
     
-    func updateCollectionViewLayoutFooterSize(size: CGSize) {
-        let layout = pokemonListCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.footerReferenceSize = size
+    func updateCollectionViewLayoutFooterSize(size: CGSize, type: PokemonsListTypes) {
+        switch type {
+            
+        case .allPokemons:
+            let layout = allPokemonsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.footerReferenceSize = size
+            
+        case .ownedPokemons:
+            let layout = ownedPokemonsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.footerReferenceSize = size
+        }
     }
     
-    func removeFooter() {
+    func removeFooter(type: PokemonsListTypes) {
         let noVisibleFooter = CGSize(width: 1, height: 0.1)
-        updateCollectionViewLayoutFooterSize(size: noVisibleFooter)
+        updateCollectionViewLayoutFooterSize(size: noVisibleFooter, type: type)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PokemonDetailViewController, let index = sender as? IndexPath {
-            let pokemon = pokemonsList()[index.row]
+            let pokemon = allPokemons[index.row]
             destination.selectedPokemon = pokemon
         }
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        
-        pokemonListCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0),
-                                          at: .top,
-                                          animated: true)
-    }
-    
-    func pokemonsList() -> [Pokemon] {
-        if titleSegmentedControl.selectedSegmentIndex == 0 {
-            return allPokemons
-        }
-        return ownedPokemons
-    }
 }
 
 extension PokemonListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -202,12 +231,18 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Showing \(pokemonsList().count) pokemons")
-        return pokemonsList().count
+        switch titleSegmentedControl.selectedSegmentIndex {
+        case 0:
+            return allPokemons.count
+        case 1:
+            return ownedPokemons.count
+        default:
+            return 0
+        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        removeFooter()
+        removeFooter(type: .allPokemons)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -238,16 +273,36 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionFooter {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: loadingFooterIdentifier, for: indexPath)
-            self.footerView = footerView as? PokemonListFooterActivityIndicator
-            return footerView
+        switch titleSegmentedControl.selectedSegmentIndex {
+        case 0:
+            if kind == UICollectionView.elementKindSectionFooter {
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: loadingFooterIdentifier, for: indexPath)
+                self.allPokemonsFooter = footerView as? PokemonListFooterActivityIndicator
+                return footerView
+            }
+        case 1:
+            if kind == UICollectionView.elementKindSectionFooter {
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: loadingFooterIdentifier, for: indexPath)
+                self.ownedPokemonsFooter = footerView as? PokemonListFooterActivityIndicator
+                return footerView
+            }
+        default:
+            return UICollectionReusableView()
         }
         return UICollectionReusableView()
     }
     
     func buildCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
-        let pokemonsList = self.pokemonsList()
+        
+        var pokemonsList: [Pokemon]
+        switch titleSegmentedControl.selectedSegmentIndex {
+        case 0:
+            pokemonsList = allPokemons
+        case 1:
+            pokemonsList = ownedPokemons
+        default:
+            pokemonsList = []
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCardCollectionViewCell.cellIdentifier, for: indexPath) as? PokemonCardCollectionViewCell
         
         let selectedPokemon = pokemonsList[indexPath.row]

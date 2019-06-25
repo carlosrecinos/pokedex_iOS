@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var assembler: Assembler?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         shouldGoToMain()
         initTheme()
@@ -19,6 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO
         let customFont = UIFont(name: "Pokemon Solid", size: 17.0)!
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: [.normal])
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.pokeYellow
+        navigationBarAppearace.barTintColor = UIColor.pokeRed
+        navigationBarAppearace.isTranslucent = false
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.pokeYellow,
+            NSAttributedString.Key.font: customFont]
     }
     
     func shouldGoToMain() {
