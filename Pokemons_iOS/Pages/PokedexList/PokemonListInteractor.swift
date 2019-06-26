@@ -25,7 +25,7 @@ class PokemonListInteractor: PokemonListInteractorProtocol {
     
     func loadLocalPokemons() {
         let pokemons = pokemonsService?.loadLocalPokemons()
-        if let pokemons = pokemons, pokemons.count > 0 {
+        if let pokemons = pokemons, pokemons.fetchedObjects?.count ?? 0 > 0 {
             pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
         } else {
             fetchPokemons()
@@ -35,7 +35,9 @@ class PokemonListInteractor: PokemonListInteractorProtocol {
     func fetchPokemons() {
         pokemonsService?.fetchPokemons()
             .onSuccess(callback: { pokemons in
-                self.pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
+                if let pokemons = pokemons {
+                    self.pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
+                }
             })
         .onFailure(callback: { error in
             print(error)

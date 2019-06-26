@@ -25,7 +25,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="5cf-NL-LGN">
             <objects>
-                <tabBarController id="fIe-Rp-vlH" sceneMemberID="viewController">
+                <tabBarController hidesBottomBarWhenPushed="YES" id="fIe-Rp-vlH" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5uB-ar-opG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -7,7 +7,8 @@ protocol PokemonDetailViewControllerProtocol {
 
 class PokemonDetailViewController: UIViewController, PokemonDetailViewControllerProtocol {
 
-    var selectedPokemon: Pokemon?
+    var selectedPokemon: PokemonModel?
+    var pokemonStruct: Pokemon?
     var spritesSegueIdentifier = "SpritesViewSegue"
     var statsSegueIdentifer = "StatsSegueIdentifier"
     var spritesCarouselViewController: SpritesCarouselViewController!
@@ -35,9 +36,12 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
     
     func initConfig() {
         navigationController?.view.backgroundColor = UIColor.groupTableViewBackground
+        
+        let catchPokemonButton = UIBarButtonItem(image: UIImage(named: "catch_icon")?.resizeImage(newWidth: 32), style: .plain, target: self, action: #selector(loadCatchPokemonView(_:)))
+        
         self.navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.leftBarButtonItem?.title = nil
-        self.navigationItem.backBarButtonItem?.title = nil
+        self.navigationItem.rightBarButtonItem = catchPokemonButton
         
         abilitiesContainer?.translatesAutoresizingMaskIntoConstraints = false
         
@@ -51,17 +55,24 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
         statContainer?.clipsToBounds = true
     }
     
+    @objc func loadCatchPokemonView(_ button: UIBarButtonItem) {
+        performSegue(withIdentifier: "CatchPokemonSegue", sender: nil)
+    }
+    
     func loadPokemonInfo() {
+        if let pokemon = selectedPokemon {
+            pokemonStruct = pokemon.getStruct()
+        }
         nameLabel?.text = selectedPokemon?.name
         requestDetail()
     }
     
     func requestDetail() {
-        pokemonDetailPresenter?.getDetail(selectedPokemon?.getPokemonId() ?? 1)
+        pokemonDetailPresenter?.getDetail(pokemonStruct?.getPokemonId() ?? 1)
     }
     
     func loadPokemonDetail(_ detail: PokemonDetail) {
-        selectedPokemon?.detail = detail
+        pokemonStruct?.detail = detail
         showDetailData()
     }
     
@@ -73,21 +84,21 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
     }
     
     func loadStats() {
-        if let stats = selectedPokemon?.detail?.stats {
+        if let stats = pokemonStruct?.detail?.stats {
             statsViewController?.loadStats(stats)
         }
         
     }
     
     func loadSprites() {
-        let sprites = selectedPokemon?.detail?.sprites?.getSprites()
+        let sprites = pokemonStruct?.detail?.sprites?.getSprites()
         if let sprites = sprites {
             spritesCarouselViewController?.loadSprites(sprites)
         }
     }
     
     func loadTypes() {
-        if let types = selectedPokemon?.detail?.types {
+        if let types = pokemonStruct?.detail?.types {
             for type in types {
                 let typeImageView = createTypeImageView(type.type.name)
                 typeImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,7 +108,7 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
     }
     
     func loadAbilities() {
-        let abilitiesText = selectedPokemon?.detail?.abilities.map({"\($0.ability.name)"}).joined(separator: "\n")
+        let abilitiesText = pokemonStruct?.detail?.abilities.map({"\($0.ability.name)"}).joined(separator: "\n")
         abilitiesLabel?.text = abilitiesText
     }
     
@@ -120,6 +131,8 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
             self.statsViewController = destination
         
             self.statsViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        } else if let destination = segue.destination as? CatchPokemonViewController, segue.identifier == "CatchPokemonSegue" {
+            destination.pokemonToCatch = self.selectedPokemon
         }
     }
 }

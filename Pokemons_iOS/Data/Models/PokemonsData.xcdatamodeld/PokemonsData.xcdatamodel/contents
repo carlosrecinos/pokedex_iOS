@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PokemonBattleModel" representedClassName=".PokemonBattleModel" syncable="YES">
+        <attribute name="dateStarted" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="round" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="score" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="pokemon_battle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PokemonModel" inverseName="battle" inverseEntity="PokemonModel" syncable="YES"/>
+    </entity>
     <entity name="PokemonModel" representedClassName=".PokemonModel" syncable="YES">
         <attribute name="caught" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="url" attributeType="String" syncable="YES"/>
+        <relationship name="battle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PokemonBattleModel" inverseName="pokemon_battle" inverseEntity="PokemonBattleModel" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PokemonModel" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="PokemonBattleModel" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="PokemonModel" positionX="-54" positionY="-9" width="128" height="120"/>
     </elements>
 </model>

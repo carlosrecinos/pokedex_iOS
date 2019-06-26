@@ -232,11 +232,20 @@
                         <outlet property="statContainer" destination="d4B-Xe-4Iy" id="6pF-lO-lKW"/>
                         <outlet property="typesContainer" destination="s0Q-I9-SPV" id="dJd-sD-ljQ"/>
                         <outlet property="typesStackView" destination="J1k-aL-8R2" id="GVn-6Q-pZk"/>
+                        <segue destination="uZi-aB-zHP" kind="show" identifier="CatchPokemonSegue" id="xxE-8s-tmp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pof-6C-Mdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="886.95652173913049" y="24.776785714285712"/>
+        </scene>
+        <!--CatchPokemon-->
+        <scene sceneID="VpT-AB-WiG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CatchPokemon" id="uZi-aB-zHP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HOo-3z-QCm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2234" y="-340"/>
         </scene>
         <!--Sprites Carousel View Controller-->
         <scene sceneID="9bY-jX-mkf">

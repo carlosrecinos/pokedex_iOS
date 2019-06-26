@@ -8,6 +8,7 @@
 
 import Foundation
 import BrightFutures
+import CoreData
 
 enum PokemonServiceError: Error {
     case notFound
@@ -16,9 +17,9 @@ enum PokemonServiceError: Error {
 }
 
 protocol PokemonServiceProtocol {
-    func fetchPokemons() -> Future<[Pokemon], PokemonServiceError>
+    func fetchPokemons() -> Future<NSFetchedResultsController<PokemonModel>?, PokemonServiceError>
     func fetchPokemon(_ id: Int) -> Future<PokemonDetail, PokemonServiceError>
-    func loadLocalPokemons() -> [Pokemon]
+    func loadLocalPokemons() -> NSFetchedResultsController<PokemonModel>?
 }
 
 class PokemonService: PokemonServiceProtocol {
@@ -69,19 +70,33 @@ class PokemonService: PokemonServiceProtocol {
         return pokemonsStructs
     }
     
-    func loadLocalPokemons() -> [Pokemon] {
-        let coreDataPokemons = getCoreDataPokemons()
-        let pokemons = convertFromModelToStruct(coreDataPokemons)
-        return pokemons
+    func loadLocalPokemons() -> NSFetchedResultsController<PokemonModel>? {
+        guard let context = coreDataManager?.persistentContainer.viewContext else {
+            return nil
+        }
+        
+        let request = PokemonModel.fetchRequest() as NSFetchRequest<PokemonModel>
+        let sortById = NSSortDescriptor(key: #keyPath(PokemonModel.id), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        request.sortDescriptors = [sortById]
+        
+        let fetchedPokemonsRS: NSFetchedResultsController<PokemonModel>
+        do {
+            fetchedPokemonsRS = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            try fetchedPokemonsRS.performFetch()
+            return fetchedPokemonsRS
+        } catch let error as NSError {
+            print("Fatal error: \(error)")
+        }
+        return nil
     }
     
-    func fetchPokemons() -> Future<[Pokemon], PokemonServiceError> {
+    func fetchPokemons() -> Future<NSFetchedResultsController<PokemonModel>?, PokemonServiceError> {
         
         let pokemonsFromCoreData = getCoreDataPokemons()
         let offset = pokemonsFromCoreData?.count ?? 0
         let limit = 29
         
-        let promise = Promise<[Pokemon], PokemonServiceError>()
+        let promise = Promise<NSFetchedResultsController<PokemonModel>?, PokemonServiceError>()
         let url = "\(Constants.baseUrl)/api/pokemon/?offset=\(offset)&&limit=\(limit)"
         
         networking?.request(url: url)
@@ -92,9 +107,10 @@ class PokemonService: PokemonServiceProtocol {
                         let pokemons = pokemonsResponse.data?.results!
                         if let pokemons = pokemons {
                             self.savePokemonsToCoreData(pokemons)
-                            promise.success(pokemons)
+                            let newPokemons = self.loadLocalPokemons()
+                            promise.success(newPokemons)
                         } else {
-                            promise.success([])
+                            promise.failure(.serviceError)
                         }
                     } catch let error {
                         print(error)

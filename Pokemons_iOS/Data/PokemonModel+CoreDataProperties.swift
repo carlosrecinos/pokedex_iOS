@@ -2,7 +2,7 @@
 //  PokemonModel+CoreDataProperties.swift
 //  
 //
-//  Created by Carlos Recinos on 6/25/19.
+//  Created by Carlos Recinos on 6/26/19.
 //
 //
 
@@ -16,9 +16,10 @@ extension PokemonModel {
         return NSFetchRequest<PokemonModel>(entityName: "PokemonModel")
     }
 
+    @NSManaged public var caught: Bool
+    @NSManaged public var id: Int16
     @NSManaged public var name: String?
     @NSManaged public var url: String?
-    @NSManaged public var id: Int16
-    @NSManaged public var caught: Bool
+    @NSManaged public var battle: PokemonBattleModel?
 
 }

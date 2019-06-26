@@ -16,4 +16,5 @@ class StatsPokemonSlider: UISlider {
         rect.size.height = 8
         return rect
     }
+    
 }

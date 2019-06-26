@@ -19,9 +19,10 @@ class PokemonCardCollectionViewCell: UICollectionViewCell, ReusableCell {
         
     }
     
-    func configure(_ pokemon: Pokemon) {
+    func configure(_ pokemon: PokemonModel) {
         configureLayout()
-        let imageUrl = pokemon.getImageUrl()
+        let pokemonStruct = pokemon.getStruct()
+        let imageUrl = pokemonStruct.getImageUrl()
         pokemonImage.imageFromURL(urlString: imageUrl, withSize: CGSize(width: 100, height: 100))
         
         pokemonNameLabel.text = pokemon.name

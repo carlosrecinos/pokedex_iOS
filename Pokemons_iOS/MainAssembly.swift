@@ -141,6 +141,13 @@ class MainAssembly: Assembly {
         }
     }
     
+    func registerCatchPokemonPage(to container: Container) {
+        container.storyboardInitCompleted(CatchPokemonViewController.self, initCompleted: { (resolver, viewController) in
+            let coreDataManager = resolver.resolve(CoreDataManager.self)!
+            viewController.inject(coreDataManager: coreDataManager)
+        })
+    }
+    
     func registerProfilePage(to container: Container) {
         container.storyboardInitCompleted(ProfileViewController.self) {(resolver, viewController) in
             let coreDataManager = resolver.resolve(CoreDataManager.self)!

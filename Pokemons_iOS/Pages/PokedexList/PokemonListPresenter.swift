@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import CoreData
 
 protocol PokemonListPresenterProtocol {
     var pokemonListViewController: PokemonListViewControllerProtocol? { get set }
-    func updateAllPokemonsList(pokemons: [Pokemon])
+    func updateAllPokemonsList(pokemons: NSFetchedResultsController<PokemonModel>)
     func updateOwnedPokemonsList(pokemons: [Pokemon])
     func showError(error: PokemonServiceError)
     func fetchPokemons(type: PokemonsListTypes)
@@ -47,12 +48,12 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
         }
     }
     
-    func updateAllPokemonsList(pokemons: [Pokemon]) {
+    func updateAllPokemonsList(pokemons: NSFetchedResultsController<PokemonModel>) {
         pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .allPokemons)
     }
     
     func updateOwnedPokemonsList(pokemons: [Pokemon]) {
-        pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .ownedPokemons)
+//        pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .ownedPokemons)
     }
     
     func showError(error: PokemonServiceError) {

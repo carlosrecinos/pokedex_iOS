@@ -1,8 +1,9 @@
 import Foundation
 import UIKit
+import CoreData
 
 protocol PokemonListViewControllerProtocol {
-    func updatePokemonsList(pokemons: [Pokemon], type: PokemonsListTypes)
+    func updatePokemonsList(pokemons: NSFetchedResultsController<PokemonModel>, type: PokemonsListTypes)
 }
 
 enum PokemonsListTypes {
@@ -19,7 +20,7 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     var pokemonListPresenter: PokemonListPresenterProtocol?
     var ownedPokemons: [Pokemon] = []
-    var allPokemons: [Pokemon] = []
+    var allPokemons: NSFetchedResultsController<PokemonModel>?
     var isLoading = false
     var allPokemonsFooter: PokemonListFooterActivityIndicator?
     var ownedPokemonsFooter: PokemonListFooterActivityIndicator?
@@ -159,20 +160,9 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         
     }
     
-    func updatePokemonsList(pokemons: [Pokemon], type: PokemonsListTypes) {
+    func updatePokemonsList(pokemons: NSFetchedResultsController<PokemonModel>, type: PokemonsListTypes) {
+        allPokemons = pokemons
         isLoading = false
-        
-        switch type {
-        case .allPokemons:
-            allPokemons += pokemons
-            allPokemonsCollectionView.reloadData()
-            removeFooter(type: .allPokemons)
-        case .ownedPokemons:
-            ownedPokemons += pokemons
-            ownedPokemonsCollectionView.reloadData()
-            removeFooter(type: .ownedPokemons)
-        }
-        
         
     }
 
@@ -217,7 +207,8 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PokemonDetailViewController, let index = sender as? IndexPath {
-            let pokemon = allPokemons[index.row]
+            destination.hidesBottomBarWhenPushed = true
+            let pokemon = allPokemons?.object(at: index)
             destination.selectedPokemon = pokemon
         }
     }
@@ -233,7 +224,7 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch titleSegmentedControl.selectedSegmentIndex {
         case 0:
-            return allPokemons.count
+            return allPokemons?.fetchedObjects?.count ?? 0
         case 1:
             return ownedPokemons.count
         default:
@@ -293,26 +284,29 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func buildCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        //Prev implementation
+//        var pokemonsList: [Pokemon]
+//        switch titleSegmentedControl.selectedSegmentIndex {
+//        case 0:
+//            pokemonsList = allPokemons
+//        case 1:
+//            pokemonsList = ownedPokemons
+//        default:
+//            pokemonsList = []
+//        }
         
-        var pokemonsList: [Pokemon]
-        switch titleSegmentedControl.selectedSegmentIndex {
-        case 0:
-            pokemonsList = allPokemons
-        case 1:
-            pokemonsList = ownedPokemons
-        default:
-            pokemonsList = []
-        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonCardCollectionViewCell.cellIdentifier, for: indexPath) as? PokemonCardCollectionViewCell
-        
-        let selectedPokemon = pokemonsList[indexPath.row]
-        
-        if let cell = cell {
+
+        let selectedPokemon = allPokemons?.object(at: indexPath)
+
+        if let cell = cell, let selectedPokemon = selectedPokemon {
             cell.configure(selectedPokemon)
         } else {
             print("No cell")
         }
         return cell ?? UICollectionViewCell()
+        
+        
     }
     
 }
