@@ -51,9 +51,13 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         self.navigationItem.titleView = buildSegmentedControlTitle()
         self.navigationItem.largeTitleDisplayMode = .always
         
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_icon"), style: .done, target: self, action: nil)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
+        
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.alpha = 0
     }
     
     func configureTabbar() {
@@ -61,7 +65,7 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         
         self.tabBarItem = tabBarItem
         self.tabBarController?.tabBar.tintColor = UIColor.pokeRed
-        self.tabBarController?.tabBar.isTranslucent = false
+        self.tabBarController?.tabBar.isTranslucent = true
         
     }
     
@@ -163,7 +167,7 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     func updatePokemonsList(pokemons: NSFetchedResultsController<PokemonModel>, type: PokemonsListTypes) {
         allPokemons = pokemons
         isLoading = false
-        
+        allPokemonsCollectionView.reloadData()
     }
 
     func showFooter(type: PokemonsListTypes) {
@@ -207,10 +211,18 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PokemonDetailViewController, let index = sender as? IndexPath {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.navigationController?.navigationBar.alpha = 1
+            })
             destination.hidesBottomBarWhenPushed = true
             let pokemon = allPokemons?.object(at: index)
             destination.selectedPokemon = pokemon
         }
+    }
+    
+    func animateHeader(_ contentOffset: CGFloat) {
+        let offset = contentOffset / 75
+        self.navigationController?.navigationBar.alpha = offset
     }
     
 }
@@ -237,6 +249,7 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let threshold   = 100.0 ;
         let contentOffset = scrollView.contentOffset.y;
         let contentHeight = scrollView.contentSize.height;
@@ -245,7 +258,7 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         var triggerThreshold  = Float((diffHeight - frameHeight))/Float(threshold);
         triggerThreshold   =  min(triggerThreshold, 0.0)
         let pullRatio  = min(abs(triggerThreshold),1.0);
-        
+        animateHeader(contentOffset)
 //        print("isLoading \(isLoading)")
         if (pullRatio >= 1) && !isLoading {
             requestNewPokemonsList()

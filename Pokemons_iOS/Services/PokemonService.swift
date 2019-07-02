@@ -71,6 +71,8 @@ class PokemonService: PokemonServiceProtocol {
     }
     
     func loadLocalPokemons() -> NSFetchedResultsController<PokemonModel>? {
+        
+        //Before implementing this solution the app was using 64 MB of RAM
         guard let context = coreDataManager?.persistentContainer.viewContext else {
             return nil
         }

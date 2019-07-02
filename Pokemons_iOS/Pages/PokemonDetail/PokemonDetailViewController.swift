@@ -11,18 +11,18 @@ class PokemonDetailViewController: UIViewController, PokemonDetailViewController
     var pokemonStruct: Pokemon?
     var spritesSegueIdentifier = "SpritesViewSegue"
     var statsSegueIdentifer = "StatsSegueIdentifier"
-    var spritesCarouselViewController: SpritesCarouselViewController!
-    var statsViewController: StatsViewController!
+    weak var spritesCarouselViewController: SpritesCarouselViewController!
+    weak var statsViewController: StatsViewController!
     var pokemonDetailPresenter: PokemonDetailPresenterProtocol?
     
-    @IBOutlet var nameLabel: UILabel?
-    @IBOutlet var contentScrollView: UIScrollView?
-    @IBOutlet var typesStackView: UIStackView?
-    @IBOutlet var typesContainer: UIView?
-    @IBOutlet var statContainer: UIView?
+    @IBOutlet weak var nameLabel: UILabel?
+    @IBOutlet weak var contentScrollView: UIScrollView?
+    @IBOutlet weak var typesStackView: UIStackView?
+    @IBOutlet weak var typesContainer: UIView?
+    @IBOutlet weak var statContainer: UIView?
     
-    @IBOutlet var abilitiesContainer: UIView?
-    @IBOutlet var abilitiesLabel: UILabel?
+    @IBOutlet weak var abilitiesContainer: UIView?
+    @IBOutlet weak var abilitiesLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

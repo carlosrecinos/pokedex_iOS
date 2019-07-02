@@ -2,9 +2,9 @@ import UIKit
 
 class SlideView: UIView {
     
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -228,6 +228,7 @@
                     <connections>
                         <outlet property="abilitiesContainer" destination="Evf-Bl-wcf" id="J2z-q7-zwX"/>
                         <outlet property="abilitiesLabel" destination="sal-ce-fbB" id="GSb-9r-d3h"/>
+                        <outlet property="contentScrollView" destination="KM2-L4-zGs" id="wyG-8e-dDa"/>
                         <outlet property="nameLabel" destination="x04-pm-frd" id="jGL-pw-01M"/>
                         <outlet property="statContainer" destination="d4B-Xe-4Iy" id="6pF-lO-lKW"/>
                         <outlet property="typesContainer" destination="s0Q-I9-SPV" id="dJd-sD-ljQ"/>

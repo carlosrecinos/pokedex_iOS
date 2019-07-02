@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationBarAppearace = UINavigationBar.appearance()
         navigationBarAppearace.tintColor = UIColor.pokeYellow
         navigationBarAppearace.barTintColor = UIColor.pokeRed
-        navigationBarAppearace.isTranslucent = false
         // change navigation item title color
         navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.pokeYellow,
             NSAttributedString.Key.font: customFont]

@@ -50,6 +50,7 @@ class PokemonListPresenter: PokemonListPresenterProtocol {
     
     func updateAllPokemonsList(pokemons: NSFetchedResultsController<PokemonModel>) {
         pokemonListViewController?.updatePokemonsList(pokemons: pokemons, type: .allPokemons)
+        
     }
     
     func updateOwnedPokemonsList(pokemons: [Pokemon]) {

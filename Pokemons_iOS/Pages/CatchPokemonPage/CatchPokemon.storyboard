@@ -153,8 +153,38 @@
                                     <constraint firstItem="GZy-uy-7fL" firstAttribute="top" secondItem="0JV-Mb-Mu9" secondAttribute="top" id="zQg-PE-pKE"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUm-o7-dVK" userLabel="GameOverContainer">
+                                <rect key="frame" x="24" y="615" width="366" height="197"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRm-na-Aoz">
+                                        <rect key="frame" x="147" y="83" width="72" height="31"/>
+                                        <color key="backgroundColor" red="1" green="0.79607843140000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="24" minY="4" maxX="24" maxY="4"/>
+                                        <state key="normal" title="Ok!">
+                                            <color key="titleColor" red="0.1137254902" green="0.17254901959999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goButtonPressed:" destination="tXr-DZ-Wtq" eventType="touchUpInside" id="6qz-IH-sep"/>
+                                            <action selector="okButtonPressed:" destination="tXr-DZ-Wtq" eventType="touchUpInside" id="nt9-HM-lTe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.47476067259999999" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="pRm-na-Aoz" firstAttribute="top" secondItem="iUm-o7-dVK" secondAttribute="top" constant="83" id="AV8-39-ije"/>
+                                    <constraint firstItem="pRm-na-Aoz" firstAttribute="centerX" secondItem="iUm-o7-dVK" secondAttribute="centerX" id="mr0-k2-YCO"/>
+                                    <constraint firstAttribute="bottom" secondItem="pRm-na-Aoz" secondAttribute="bottom" constant="83" id="sSw-kF-tb6"/>
+                                </constraints>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="8ef-r0-6Z8">
                                 <rect key="frame" x="87" y="144" width="240" height="200"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="3AC-1I-NDc">
+                                <rect key="frame" x="87" y="319" width="240" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ElL-Kd-h1L"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -163,24 +193,34 @@
                             <constraint firstItem="eGk-DC-yko" firstAttribute="trailing" secondItem="8ef-r0-6Z8" secondAttribute="trailing" constant="87" id="6pD-Jk-gs7"/>
                             <constraint firstAttribute="bottom" secondItem="aT2-8I-P53" secondAttribute="bottom" id="8YX-b8-ZJb"/>
                             <constraint firstItem="eGk-DC-yko" firstAttribute="bottom" secondItem="P2a-Jd-H3w" secondAttribute="bottom" constant="50" id="9Rs-Jj-c1A"/>
+                            <constraint firstItem="eGk-DC-yko" firstAttribute="bottom" secondItem="iUm-o7-dVK" secondAttribute="bottom" constant="50" id="BBu-Kc-tZ8"/>
                             <constraint firstItem="8ef-r0-6Z8" firstAttribute="top" secondItem="eGk-DC-yko" secondAttribute="top" priority="251" constant="100" id="Jcr-Un-dW6"/>
                             <constraint firstItem="8ef-r0-6Z8" firstAttribute="leading" secondItem="eGk-DC-yko" secondAttribute="leading" constant="87" id="Kjf-YE-M8G"/>
+                            <constraint firstItem="3AC-1I-NDc" firstAttribute="width" secondItem="8ef-r0-6Z8" secondAttribute="width" id="LBy-hh-cwb"/>
                             <constraint firstItem="aT2-8I-P53" firstAttribute="leading" secondItem="lOP-8y-R2m" secondAttribute="leading" id="Ngh-Vp-Lac"/>
                             <constraint firstAttribute="trailing" secondItem="aT2-8I-P53" secondAttribute="trailing" id="Qt0-EM-fc5"/>
+                            <constraint firstItem="3AC-1I-NDc" firstAttribute="top" secondItem="8ef-r0-6Z8" secondAttribute="bottom" constant="-25" id="Squ-fH-9h4"/>
                             <constraint firstItem="eGk-DC-yko" firstAttribute="trailing" secondItem="P2a-Jd-H3w" secondAttribute="trailing" constant="24" id="h07-sV-2Q7"/>
+                            <constraint firstItem="iUm-o7-dVK" firstAttribute="leading" secondItem="eGk-DC-yko" secondAttribute="leading" constant="24" id="jZq-Zb-vKu"/>
                             <constraint firstItem="aT2-8I-P53" firstAttribute="top" secondItem="lOP-8y-R2m" secondAttribute="top" id="n1o-gU-w5G"/>
+                            <constraint firstItem="iUm-o7-dVK" firstAttribute="top" secondItem="8ef-r0-6Z8" secondAttribute="bottom" priority="250" constant="271" id="oLG-RX-9av"/>
+                            <constraint firstItem="eGk-DC-yko" firstAttribute="trailing" secondItem="iUm-o7-dVK" secondAttribute="trailing" constant="24" id="olT-4F-y7A"/>
+                            <constraint firstItem="3AC-1I-NDc" firstAttribute="centerX" secondItem="8ef-r0-6Z8" secondAttribute="centerX" id="sbV-KM-zaJ"/>
                             <constraint firstItem="P2a-Jd-H3w" firstAttribute="leading" secondItem="eGk-DC-yko" secondAttribute="leading" constant="24" id="zkI-ff-MJM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eGk-DC-yko"/>
                     </view>
                     <connections>
                         <outlet property="currentScoreLabel" destination="LJp-1n-8ga" id="oTt-cb-rGH"/>
+                        <outlet property="gameOverContainer" destination="iUm-o7-dVK" id="bHp-wc-hzr"/>
                         <outlet property="goButton" destination="7rk-mL-EMq" id="JIs-1A-AYb"/>
                         <outlet property="goalLabel" destination="Z3a-af-0dW" id="Hdl-pQ-9FP"/>
                         <outlet property="infoContainer" destination="P2a-Jd-H3w" id="QOg-3Q-QaQ"/>
+                        <outlet property="okButton" destination="pRm-na-Aoz" id="hB7-sk-lYh"/>
                         <outlet property="pokeballSlider" destination="8Cl-nl-C8R" id="nC0-TP-hZe"/>
                         <outlet property="pokemonImage" destination="8ef-r0-6Z8" id="n4t-a4-xMR"/>
                         <outlet property="roundLabel" destination="d8k-Ro-KK5" id="ZHB-LD-3bq"/>
+                        <outlet property="shadowImage" destination="3AC-1I-NDc" id="r1P-7V-ZJw"/>
                         <segue destination="y8j-Vn-q7u" kind="show" identifier="CatchPokemonHelpSegue" id="pcZ-c8-ctL"/>
                     </connections>
                 </viewController>
@@ -207,30 +247,26 @@
                                         <color key="shadowColor" red="0.1137254902" green="0.17254901959999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="2" height="2"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rules" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxa-gh-ybB">
-                                        <rect key="frame" x="12" y="54" width="44.5" height="26"/>
-                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="17"/>
-                                        <color key="textColor" red="1" green="0.79607843140000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.1137254902" green="0.17254901959999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <size key="shadowOffset" width="2" height="2"/>
-                                    </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="200" image="question_pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="dsx-py-sJr">
-                                        <rect key="frame" x="158" y="540" width="50" height="100"/>
+                                        <rect key="frame" x="158" y="122" width="50" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="GPh-3L-zPY"/>
                                             <constraint firstAttribute="width" constant="50" id="gLD-a4-rHt"/>
                                         </constraints>
                                     </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="342" placeholderIntrinsicHeight="26" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="5oy-jg-XyV">
+                                        <rect key="frame" x="12" y="66" width="342" height="26"/>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.47476067259999999" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="jxa-gh-ybB" firstAttribute="leading" secondItem="Y6k-sb-5Tb" secondAttribute="leading" constant="12" id="5VJ-us-BVZ"/>
-                                    <constraint firstItem="jxa-gh-ybB" firstAttribute="top" secondItem="66c-nV-880" secondAttribute="bottom" constant="12" id="D5d-bO-1fQ"/>
+                                    <constraint firstItem="dsx-py-sJr" firstAttribute="top" secondItem="5oy-jg-XyV" secondAttribute="bottom" constant="30" id="GVp-TF-lqv"/>
                                     <constraint firstItem="66c-nV-880" firstAttribute="centerX" secondItem="Y6k-sb-5Tb" secondAttribute="centerX" id="NLg-6B-Frd"/>
                                     <constraint firstItem="dsx-py-sJr" firstAttribute="centerX" secondItem="Y6k-sb-5Tb" secondAttribute="centerX" id="NuW-uL-aFm"/>
-                                    <constraint firstAttribute="bottom" secondItem="dsx-py-sJr" secondAttribute="bottom" constant="104" id="O8B-rU-g49"/>
+                                    <constraint firstItem="5oy-jg-XyV" firstAttribute="leading" secondItem="Y6k-sb-5Tb" secondAttribute="leading" constant="12" id="QGY-pz-Efa"/>
+                                    <constraint firstAttribute="trailing" secondItem="5oy-jg-XyV" secondAttribute="trailing" constant="12" id="Usi-5b-wO5"/>
                                     <constraint firstItem="66c-nV-880" firstAttribute="top" secondItem="Y6k-sb-5Tb" secondAttribute="top" constant="12" id="jOS-FT-cSG"/>
+                                    <constraint firstItem="5oy-jg-XyV" firstAttribute="top" secondItem="66c-nV-880" secondAttribute="bottom" constant="24" id="phE-zV-0Fv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -245,7 +281,7 @@
                     </view>
                     <connections>
                         <outlet property="rulesContainer" destination="Y6k-sb-5Tb" id="aQc-gg-Aan"/>
-                        <outlet property="rulesLabel" destination="jxa-gh-ybB" id="ArA-Un-JVs"/>
+                        <outlet property="rulesStackView" destination="5oy-jg-XyV" id="bt3-Ns-WJB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQD-dr-rGv" userLabel="First Responder" sceneMemberID="firstResponder"/>

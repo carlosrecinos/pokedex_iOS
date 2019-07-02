@@ -10,7 +10,7 @@ import UIKit
 
 class StatsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet var statsTableView: UITableView!
+    @IBOutlet weak var statsTableView: UITableView!
     
     var stats: [PokemonStats]?
     var cellIdentifier = "StatCellIdentifier"

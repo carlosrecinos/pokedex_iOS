@@ -37,6 +37,7 @@ class PokemonListInteractor: PokemonListInteractorProtocol {
             .onSuccess(callback: { pokemons in
                 if let pokemons = pokemons {
                     self.pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
+                    
                 }
             })
         .onFailure(callback: { error in

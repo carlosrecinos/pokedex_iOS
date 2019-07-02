@@ -7,8 +7,8 @@ struct ImageSprite {
 
 class SpritesCarouselViewController: UIViewController, UIScrollViewDelegate {
     
-    @IBOutlet var spritesScrollView: UIScrollView!
-    @IBOutlet var spritesPageControl: UIPageControl!
+    @IBOutlet weak var spritesScrollView: UIScrollView!
+    @IBOutlet weak var spritesPageControl: UIPageControl!
     
     var sprites: [String]?
     var slides: [SlideView]?
