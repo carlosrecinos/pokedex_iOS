@@ -12,11 +12,5 @@ struct User: Decodable {
     var id: Int?
     var name: String?
     var username: String?
-    var password: String?
-    
-    init(id: Int, name: String, username: String) {
-        self.id = id
-        self.name = name
-        self.username = username
-    }
+    var bornDate: String?
 }

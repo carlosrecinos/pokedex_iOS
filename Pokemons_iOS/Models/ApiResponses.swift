@@ -1,22 +1,29 @@
-//
-//  Requests.swift
-//  Pokemons_iOS
-//
-//  Created by Carlos Recinos on 6/12/19.
-//  Copyright © 2019 genui. All rights reserved.
-//
-
 import Foundation
 
-
-struct PokemonsResponse: Decodable {
-    var error: Bool?
-    var data: PokeapiPayload?
+struct PokemonsApiResponse: Decodable {
+    let error: Bool
+    let data: PokemonsPayload?
 }
 
-struct PokeapiPayload: Decodable {
-    var count: Int?
+struct PokemonsPayload: Decodable {
+    let count: Int?
     var next: String?
     var previous: String?
     var results: [Pokemon]?
+}
+
+struct PokemonDetailApiResponse: Decodable {
+    let error: Bool
+    let data: PokemonDetail
+}
+
+
+struct LoginResponse: Decodable {
+    let error: Bool
+    let data: LoginPayload
+}
+
+struct LoginPayload: Decodable {
+    let user: User
+    let loginToken: String
 }

@@ -9,12 +9,35 @@
 import Foundation
 import UIKit
 
+protocol ProfileViewControllerProtocol {
+    func inject(coreDataManager: CoreDataManager)
+}
+
 class ProfileViewController: UIViewController {
+    
+    var coreDataManager: CoreDataManager?
+    
+    override func viewDidLoad() {
+        navigationItem.title = "Profile"
         
+        let trashButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash, target: self, action: #selector(deleteCoreData(_:)))
+        
+        navigationItem.rightBarButtonItem = trashButton
+    }
+    
     @IBAction func signOutButtonPressed(_ sender: Any) {
         print("Log out")
         logOut()
         goToMain()
+    }
+    
+    func inject(coreDataManager: CoreDataManager) {
+        self.coreDataManager = coreDataManager
+    }
+    
+    @objc func deleteCoreData(_ some: UIBarButtonItem) {
+        print(some)
+        coreDataManager?.deleteAllData("PokemonModel")
     }
     
     func goToMain() {

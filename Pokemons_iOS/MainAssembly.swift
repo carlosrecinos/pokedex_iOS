@@ -9,9 +9,15 @@
 import Foundation
 import Swinject
 
-
 class MainAssembly: Assembly {
     func assemble(container: Container) {
+        // CoreData
+        
+        container.register(CoreDataManager.self, factory: { _ in
+            return CoreDataManager()
+        }).inObjectScope(.container)
+        
+        
         // Networking
         container.register(HttpNetworking.self) { _ in
             return AlamofireNetworking()
@@ -21,7 +27,8 @@ class MainAssembly: Assembly {
         container.register(AuthenticationServiceProtocol.self) { resolver in
             let authenticationService = AuthenticationService()
             let networking = resolver.resolve(HttpNetworking.self)!
-            authenticationService.inject(networking: networking)
+            let keychain = KeychainManager()
+            authenticationService.inject(networking: networking, keychainManager: keychain)
             return authenticationService
         }
         
@@ -29,12 +36,30 @@ class MainAssembly: Assembly {
         container.register(PokemonServiceProtocol.self) { resolver in
             let pokemonService = PokemonService()
             let networking = resolver.resolve(HttpNetworking.self)!
-            pokemonService.inject(networking: networking)
+            let coreDataManager = resolver.resolve(CoreDataManager.self)!
+            pokemonService.inject(networking: networking, coreDataManager: coreDataManager)
             return pokemonService
         }
+        
+        
         registerLoginPage(to: container)
         registerPokemonListPage(to: container)
+        registerPokemonDetailPage(to: container)
+        registerRootPage(to: container)
+        registerProfilePage(to: container)
     }
+    
+    func registerRootPage(to container: Container) {
+        container.storyboardInitCompleted(RootViewController.self) { (resolver, viewController) in
+            let loginPage = resolver.resolve(LoginViewController.self)
+            let mainPage = resolver.resolve(PokemonListViewController.self)
+            let keychainManager = resolver.resolve(KeychainManager.self)
+            viewController.keychainManager = keychainManager
+            viewController.mainPage = mainPage
+            viewController.loginPage = loginPage
+        }
+    }
+    
     
     func registerLoginPage(to container: Container) {
         container.storyboardInitCompleted(LoginViewController.self) {(resolver, viewController) in
@@ -65,7 +90,6 @@ class MainAssembly: Assembly {
     
     func registerPokemonListPage(to container: Container) {
         container.storyboardInitCompleted(PokemonListViewController.self) { (resolver, pokemonListViewController) in
-            
             var presenter = resolver.resolve(PokemonListPresenterProtocol.self)!
             presenter.pokemonListViewController = pokemonListViewController
             pokemonListViewController.inject(presenter: presenter)
@@ -88,6 +112,48 @@ class MainAssembly: Assembly {
                 let pokemonListInteractor = interactor
                 pokemonListInteractor.pokemonListPresenter = resolver.resolve(PokemonListPresenterProtocol.self)
         }
+    }
+    
+    func registerPokemonDetailPage(to container: Container) {
+        container.storyboardInitCompleted(PokemonDetailViewController.self) { (resolver, pokemonDetailViewController) in
+            var presenter = resolver.resolve(PokemonDetailPresenterProtocol.self)!
+            presenter.pokemonDetailViewController = pokemonDetailViewController
+            pokemonDetailViewController.inject(presenter: presenter)
+        }
+        
+        container.register(PokemonDetailPresenterProtocol.self) { resolver in
+            let interactor = resolver.resolve(PokemonDetailInteractor.self)!
+            let presenter = PokemonDetailPresenter()
+            presenter.inject(interactor: interactor)
+            return presenter
+        }
+        
+        container.register(PokemonDetailInteractor.self) {resolver in
+            let interactor = PokemonDetailInteractor()
+            let pokemonService = resolver.resolve(PokemonServiceProtocol.self)!
+            interactor.inject(pokemonService)
+            return interactor
+            }
+            .initCompleted { resolver, interactor in
+                let pokemonDetailInteractor = interactor
+                
+                pokemonDetailInteractor.pokemonDetailPresenter = resolver.resolve(PokemonDetailPresenterProtocol.self)
+        }
+    }
+    
+    func registerCatchPokemonPage(to container: Container) {
+        container.storyboardInitCompleted(CatchPokemonViewController.self, initCompleted: { (resolver, viewController) in
+            let coreDataManager = resolver.resolve(CoreDataManager.self)!
+            viewController.inject(coreDataManager: coreDataManager)
+        })
+    }
+    
+    func registerProfilePage(to container: Container) {
+        container.storyboardInitCompleted(ProfileViewController.self) {(resolver, viewController) in
+            let coreDataManager = resolver.resolve(CoreDataManager.self)!
+            viewController.inject(coreDataManager: coreDataManager)
+        }
+        
     }
     
 }

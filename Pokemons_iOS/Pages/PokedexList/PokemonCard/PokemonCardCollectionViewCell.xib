@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="pokemonSolidFont.ttf">
+            <string>PokemonSolidNormal</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PokemonCardCollectionViewCell" customModule="Pokemons_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="402" height="309"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="402" height="309"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNh-MN-FYc">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="309"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="V63-wL-jeq">
+                                <rect key="frame" x="0.0" y="0.0" width="402" height="309"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="FAl-Is-mXR">
+                                        <rect key="frame" x="0.0" y="0.0" width="402" height="137"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="137" id="ZAL-Wq-JU7"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="jZb-wD-3gu">
+                                        <rect key="frame" x="0.0" y="137" width="402" height="172"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDY-jZ-k8q">
+                                                <rect key="frame" x="12" y="8" width="39.5" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="bXn-V0-q9B"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="16"/>
+                                                <color key="textColor" red="1" green="0.79607843140000001" blue="0.023529411760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <size key="shadowOffset" width="2" height="1"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.79215686269999996" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="FDY-jZ-k8q" firstAttribute="top" secondItem="jZb-wD-3gu" secondAttribute="topMargin" id="18Q-Sl-nKa"/>
+                                            <constraint firstItem="FDY-jZ-k8q" firstAttribute="leading" relation="lessThanOrEqual" secondItem="jZb-wD-3gu" secondAttribute="leading" priority="750" constant="12" id="K8z-3D-1m2"/>
+                                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="FDY-jZ-k8q" secondAttribute="trailing" priority="250" constant="12" id="KM8-q5-utV"/>
+                                            <constraint firstItem="FDY-jZ-k8q" firstAttribute="top" secondItem="jZb-wD-3gu" secondAttribute="top" constant="8" id="KSy-L1-NrF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FAl-Is-mXR" firstAttribute="top" secondItem="V63-wL-jeq" secondAttribute="top" id="FN2-fV-zbL"/>
+                                    <constraint firstAttribute="trailing" secondItem="FAl-Is-mXR" secondAttribute="trailing" id="PWs-B4-y1B"/>
+                                    <constraint firstItem="FAl-Is-mXR" firstAttribute="leading" secondItem="V63-wL-jeq" secondAttribute="leading" id="nGa-tO-xtF"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="V63-wL-jeq" secondAttribute="trailing" id="8ya-if-ZMI"/>
+                            <constraint firstItem="V63-wL-jeq" firstAttribute="top" secondItem="dNh-MN-FYc" secondAttribute="top" id="9yt-tG-kwP"/>
+                            <constraint firstAttribute="bottom" secondItem="V63-wL-jeq" secondAttribute="bottom" id="XlJ-WO-HIh"/>
+                            <constraint firstItem="V63-wL-jeq" firstAttribute="leading" secondItem="dNh-MN-FYc" secondAttribute="leading" id="c2h-EV-F7T"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="dNh-MN-FYc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="OCQ-2F-wNg"/>
+                <constraint firstItem="dNh-MN-FYc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Y7O-8K-iV9"/>
+                <constraint firstAttribute="bottom" secondItem="dNh-MN-FYc" secondAttribute="bottom" id="gXl-9t-3KD"/>
+                <constraint firstAttribute="trailing" secondItem="dNh-MN-FYc" secondAttribute="trailing" id="sdh-pB-cin"/>
+            </constraints>
+            <size key="customSize" width="402" height="309"/>
+            <connections>
+                <outlet property="cardContainer" destination="dNh-MN-FYc" id="iND-bx-vda"/>
+                <outlet property="pokemonImage" destination="FAl-Is-mXR" id="o0A-Lc-wZc"/>
+                <outlet property="pokemonNameLabel" destination="FDY-jZ-k8q" id="vIU-ao-XM6"/>
+            </connections>
+            <point key="canvasLocation" x="178.2608695652174" y="98.102678571428569"/>
+        </collectionViewCell>
+    </objects>
+</document>

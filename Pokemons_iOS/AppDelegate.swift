@@ -1,60 +1,60 @@
-//
-//  AppDelegate.swift
-//  Pokemons_iOS
-//
-//  Created by Carlos Recinos on 6/6/19.
-//  Copyright © 2019 genui. All rights reserved.
-//
-
 import UIKit
 import Swinject
 import SwinjectStoryboard
 import SwinjectAutoregistration
-//import IQKeyboardManager
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var assembler: Assembler?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        // Instantiate a window
-//        IQKeyboardManager.shared.enabled = true
         shouldGoToMain()
-        
+        initTheme()
         return true
+    }
+    
+    func initTheme() {
+        // TODO
+        let customFont = UIFont(name: "Pokemon Solid", size: 17.0)!
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: [.normal])
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.pokeYellow
+        navigationBarAppearace.barTintColor = UIColor.pokeRed
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.pokeYellow,
+            NSAttributedString.Key.font: customFont]
     }
     
     func shouldGoToMain() {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
+        
         self.window = window
-        var pageToRender: String?
-        if(isLogged()) {
-            pageToRender = "Main"
-        } else {
-            pageToRender = "Login"
-        }
-        
         let assemblies: [Assembly] = [MainAssembly()]
-        
         assembler = Assembler(assemblies, container: SwinjectStoryboard.defaultContainer)
         
-        let storyboard = SwinjectStoryboard.create(name: pageToRender ?? "Login", bundle: nil, container: SwinjectStoryboard.defaultContainer)
+        let storyboardToRender: String
+        if(isLogged()) {
+            storyboardToRender = "Main"
+        } else {
+            storyboardToRender = "Login"
+        }
+        
+        let storyboard = SwinjectStoryboard.create(name: storyboardToRender, bundle: nil, container: SwinjectStoryboard.defaultContainer)
+        
         window.rootViewController = storyboard.instantiateInitialViewController()
     }
     
     func isLogged() -> Bool {
-        let preferences = UserDefaults.standard
-        let isLogged = preferences.bool(forKey: "isLogged")
-        print("isLogged: ", isLogged)
-//        return isLogged
-        return true
+        let keychainManager = KeychainManager()
+        let isLogged = keychainManager.isLogged()
+        
+        return isLogged
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

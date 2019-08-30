@@ -13,14 +13,18 @@ import Nimble
 class LoginInteractor: QuickSpec {
     
     override func spec() {
-        describe("Pokemons App Running") {
+        describe("LoginViewController") {
+            var presenter: LoginPresenterProtocol!
+            var subject: LoginViewController!
             beforeEach {
-                
+                presenter = LoginPresenter()
+                subject = LoginViewController()
+                subject.inject(presenter: presenter)
             }
             
-            context("Everything is going well") {
-                it("should pass") {
-                    expect("This ").to(be("This "))
+            context("When didLoad is called") {
+                beforeEach {
+//                    presenter.st
                 }
             }
         }

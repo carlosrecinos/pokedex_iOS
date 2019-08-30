@@ -10,7 +10,8 @@ import Foundation
 import BrightFutures
 
 protocol PokemonListInteractorProtocol {
-    func fetchPokemons(offset: Int, limit: Int)
+    func fetchPokemons()
+    func loadLocalPokemons()
 }
 
 class PokemonListInteractor: PokemonListInteractorProtocol {
@@ -21,11 +22,23 @@ class PokemonListInteractor: PokemonListInteractorProtocol {
         self.pokemonsService = pokemonsService
     }
     
-    func fetchPokemons(offset: Int, limit: Int) {
-        
-        pokemonsService?.fetchPokemons(offset: offset, limit: limit)
+    
+    func loadLocalPokemons() {
+        let pokemons = pokemonsService?.loadLocalPokemons()
+        if let pokemons = pokemons, pokemons.fetchedObjects?.count ?? 0 > 0 {
+            pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
+        } else {
+            fetchPokemons()
+        }
+    }
+    
+    func fetchPokemons() {
+        pokemonsService?.fetchPokemons()
             .onSuccess(callback: { pokemons in
-                self.pokemonListPresenter?.updatePokemonsList(pokemons: pokemons)
+                if let pokemons = pokemons {
+                    self.pokemonListPresenter?.updateAllPokemonsList(pokemons: pokemons)
+                    
+                }
             })
         .onFailure(callback: { error in
             print(error)

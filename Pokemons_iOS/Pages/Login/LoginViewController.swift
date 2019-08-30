@@ -9,9 +9,16 @@
 import Foundation
 import UIKit
 
-let ANIMATION_DURATION = 0.5
-let INITIAL_SPRING_VELOCITY = 10.0
-let USING_SPRING_WITH_DAMPING = 10
+struct BackgroundAnimation {
+    let duration = 10.0
+    let rotation = 380
+}
+
+struct PokeballsAnimation {
+    let duration = 0.5
+    let initialSpringVelocity = 10.0
+    let usingSpringWithDamping = 10
+}
 
 protocol LoginViewControllerProtocol {
     func showErrorMessage(message: String)
@@ -31,6 +38,8 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
     var password: String?
     var loading = false
     var pokeballs: [PokeballAnimationHandler] = []
+    let backgroundAnimation = BackgroundAnimation()
+    let pokeballsAnimation = PokeballsAnimation()
     
     @IBOutlet weak var loginBackgroundImageView: UIImageView!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
@@ -46,6 +55,15 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
     @IBOutlet weak var yellowPokeballImageView: UIImageView!
     
     
+    @IBAction func clearButtonPressed(_ sender: Any) {
+        let keyManager = KeychainManager()
+        
+        do {
+            let t = try keyManager.deleteToken(username: "carlosrecinos")
+        } catch let error {
+            print(error)
+        }
+    }
     
     override func viewDidLoad() {
         setInitConfig()
@@ -77,16 +95,8 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
     
     func animatePokeballsRotation() {
         for pokeball in pokeballs {
-//            let rotationAnimation = CABasicAnimation()
-//            rotationAnimation.repeatCount = Float.greatestFiniteMagnitude
-//            rotationAnimation.isCumulative = true
-//            rotationAnimation.autoreverses = true
-//            rotationAnimation.fromValue = 0.0
-//            rotationAnimation.toValue = 4 * Double.pi
-//            rotationAnimation.duration = 10.0
-//            pokeball.imageView?.layer.add(rotationAnimation, forKey: "transform.rotation")
-            UIView.animate(withDuration: 10, delay: 0, options: [.repeat, .autoreverse], animations: {
-                pokeball.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat(360))
+            UIView.animate(withDuration: backgroundAnimation.duration, delay: 0, options: [.repeat, .autoreverse], animations: {
+                pokeball.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat(self.backgroundAnimation.rotation))
             })
         }
     }
@@ -94,7 +104,7 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
     func animateBackgroundImageView() {
         let initialBackgroundXAxis = loginBackgroundImageView?.center.x
         if let initialBackgroundXAxis = initialBackgroundXAxis {
-            UIView.animate(withDuration: 10, delay: 0, options: [.repeat, .autoreverse], animations: {
+            UIView.animate(withDuration: backgroundAnimation.duration, delay: 0, options: [.repeat, .autoreverse], animations: {
                 self.loginBackgroundImageView.center.x = initialBackgroundXAxis - 100
             })
         }
@@ -172,15 +182,15 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
                 delayedTime += 0.2
             } else {
                 UIView.animate(
-                    withDuration: ANIMATION_DURATION * 2,
+                    withDuration: pokeballsAnimation.duration * 2,
                     delay: 0,
-                    usingSpringWithDamping: CGFloat(USING_SPRING_WITH_DAMPING),
-                    initialSpringVelocity: CGFloat(INITIAL_SPRING_VELOCITY),
+                    usingSpringWithDamping: CGFloat(pokeballsAnimation.usingSpringWithDamping),
+                    initialSpringVelocity: CGFloat(pokeballsAnimation.initialSpringVelocity),
                     options: [],
                     animations: {
                         pokeball.imageView?.center.y = pokeball.initialPosition
                     })
-                _ = Timer.scheduledTimer(withTimeInterval: ANIMATION_DURATION, repeats: false) { (timer) in
+                _ = Timer.scheduledTimer(withTimeInterval: pokeballsAnimation.duration, repeats: false) { (timer) in
                     pokeball.imageView?.layer.removeAnimation(forKey: "position")
                 }
             }
@@ -195,10 +205,10 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
             let toYAxis = currentYAxis - 50
             if self.loading {
                 UIView.animate(
-                    withDuration: ANIMATION_DURATION,
+                    withDuration: pokeballsAnimation.duration,
                     delay: 0,
-                    usingSpringWithDamping: CGFloat(USING_SPRING_WITH_DAMPING),
-                    initialSpringVelocity: CGFloat(INITIAL_SPRING_VELOCITY),
+                    usingSpringWithDamping: CGFloat(pokeballsAnimation.usingSpringWithDamping),
+                    initialSpringVelocity: CGFloat(pokeballsAnimation.initialSpringVelocity),
                     options: [.repeat, .autoreverse],
                     animations: {
                         pokeballImageView?.center.y = toYAxis
