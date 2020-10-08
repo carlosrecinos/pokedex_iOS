@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m5f-BP-w2C">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m5f-BP-w2C">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,12 +13,12 @@
             <objects>
                 <viewController title="List" id="lGZ-nc-74t" customClass="PokemonListViewController" customModule="Pokemons_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9dk-LX-YQz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uVX-SI-uWE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CTa-TG-HSQ">
                                     <size key="itemSize" width="369" height="273"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -34,8 +32,8 @@
                                 </collectionReusableView>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PgK-QZ-hRp" userLabel="OwnedPokemons">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qYR-Qb-CPt">
                                     <size key="itemSize" width="369" height="273"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -49,6 +47,7 @@
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Dh-Nu-MlC"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="PgK-QZ-hRp" firstAttribute="trailing" secondItem="1Dh-Nu-MlC" secondAttribute="trailing" id="2Rv-8J-Ugz"/>
@@ -60,7 +59,6 @@
                             <constraint firstItem="1Dh-Nu-MlC" firstAttribute="trailing" secondItem="uVX-SI-uWE" secondAttribute="trailing" id="VeT-zC-21I"/>
                             <constraint firstItem="PgK-QZ-hRp" firstAttribute="top" secondItem="1Dh-Nu-MlC" secondAttribute="top" id="mQP-bc-H96"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="1Dh-Nu-MlC"/>
                     </view>
                     <navigationItem key="navigationItem" id="tHJ-9m-3jX"/>
                     <connections>
@@ -111,4 +109,12 @@
             <point key="canvasLocation" x="573.91304347826087" y="146.65178571428569"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

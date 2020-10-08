@@ -23,6 +23,11 @@ class ProfileViewController: UIViewController {
         let trashButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash, target: self, action: #selector(deleteCoreData(_:)))
         
         navigationItem.rightBarButtonItem = trashButton
+        let tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "profile_icon"), tag: 0)
+        
+        self.tabBarItem = tabBarItem
+        self.tabBarController?.tabBar.tintColor = UIColor.pokeRed
+        self.tabBarController?.tabBar.isTranslucent = true
     }
     
     @IBAction func signOutButtonPressed(_ sender: Any) {
@@ -50,5 +55,12 @@ class ProfileViewController: UIViewController {
     func logOut() {
         let preferences = UserDefaults.standard
         preferences.set(false, forKey: "isLogged")
+        let keychain = KeychainManager()
+        do {
+            try keychain.deleteToken(username: "recinos")
+        } catch {
+            
+        }
+        
     }
 }

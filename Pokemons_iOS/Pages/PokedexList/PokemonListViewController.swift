@@ -57,7 +57,7 @@ class PokemonListViewController: UIViewController, PokemonListViewControllerProt
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: nil)
         
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.alpha = 0
+//        self.navigationController?.navigationBar.alpha = 0
     }
     
     func configureTabbar() {

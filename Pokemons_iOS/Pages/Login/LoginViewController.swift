@@ -138,7 +138,6 @@ class LoginViewController: UIViewController, LoginViewControllerProtocol{
     
     func goToMain() {
         DispatchQueue.main.async {
-            print("Going to main")
             self.performSegue(withIdentifier: "goToMain", sender: nil)
         }
     }
